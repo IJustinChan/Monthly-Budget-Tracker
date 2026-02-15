@@ -46,6 +46,12 @@ public class TestIncome {
     void testIncomeAfterTax() {
         assertEquals(900, job.incomeAfterTax(job.getTax()));
     }
+
+    @Test
+    void testAddIncomeDescription() {
+        scholarship.setDescription("Won this scholarship from X by doing Y");
+        assertEquals("Won this scholarship from X by doing Y", scholarship.getDescription());
+    }
     
 }
 

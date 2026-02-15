@@ -59,7 +59,7 @@ public class MonthlyBudget {
     // MODIFIES: this
     // EFFECTS: removes a income from all incomes that matches the date, amount and source
     //          If no income matches given requirements, nothing is removed
-    public void removeIncome(int month, int day, int year, double amount, String source) {
+    public void removeIncome(int month, int day, int year, int amount, String source) {
         // stub
     }
 
@@ -67,7 +67,7 @@ public class MonthlyBudget {
     // MODIFIES: this
     // EFFECTS: removes a expense from all expenses that matches the date, amount and category
     //          If no expense matches given requirements, nothing is removed
-    public void removeExpense(int month, int day, int year, double amount, String category) {
+    public void removeExpense(int month, int day, int year, int amount, String category) {
         // stub
     }
 

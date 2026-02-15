@@ -82,8 +82,8 @@ public class MonthlyBudget {
     public void removeIncome(int month, int day, int year, int amount, String source) {
         int index = 0;
         for (Income income : allIncome) {
-            if (income.getMonth() == month && income.getDay() == day && income.getYear() == year 
-            && income.getOriginalAmount() == amount && income.getSource().equals(source)) {
+            if (income.getDay() == day  && income.getOriginalAmount() == amount 
+            && income.getSource().equals(source)) {
                 allIncome.remove(index);
                 break;
             }
@@ -98,8 +98,8 @@ public class MonthlyBudget {
     public void removeExpense(int month, int day, int year, int amount, String category) {
         int index = 0;
         for (Expense expense : allExpenses) {
-            if (expense.getMonth() == month && expense.getDay() == day && expense.getYear() == year 
-            && expense.getAmount() == amount && expense.getCategory().equals(category)) {
+            if (expense.getDay() == day && expense.getAmount() == amount 
+            && expense.getCategory().equals(category)) {
                 allExpenses.remove(index);
                 break;
             }

@@ -11,8 +11,8 @@ public class TestIncome {
 
     @BeforeEach
     void runBefore() {
-        job = new Income(1000, 1, 1, 2026, "Work", 0.1);
-        scholarship = new Income(2500, 5, 15, 2025, "Scholarship", 0);
+        job = new Income(1000, 1, "Work", 0.1);
+        scholarship = new Income(2500, 15, "Scholarship", 0);
     }
 
     @Test
@@ -21,9 +21,7 @@ public class TestIncome {
         assertEquals("Work", job.getSource());
         assertEquals(0.1, job.getTax());
         assertEquals(900, job.getAmount());
-        assertEquals(1, job.getMonth());
         assertEquals(1, job.getDay());
-        assertEquals(2026, job.getYear());
     }
 
     @Test

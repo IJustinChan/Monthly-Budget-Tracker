@@ -18,9 +18,7 @@ public class TestExpense {
     @Test
     void testContructor() {
         assertEquals(2500, rent.getAmount());
-        assertEquals(11, rent.getMonth());
         assertEquals(1, rent.getDay());
-        assertEquals(2025, rent.getYear());
         assertEquals("Rent", rent.getCategory());
         assertEquals("Need", rent.getNecessityType());
     }

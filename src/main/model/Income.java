@@ -7,8 +7,8 @@ public class Income extends Transaction {
     private double tax;
     private int amountAfterTax;
     
-    public Income(int amount, int month, int day, int year, String source, double tax) {
-        super(amount, month, day, year);
+    public Income(int amount, int day, String source, double tax) {
+        super(amount, day);
         this.source = source;
         this.tax = tax;
         amountAfterTax = incomeAfterTax(tax);
@@ -53,5 +53,5 @@ public class Income extends Transaction {
         return amount;
     }
 
-    
+
 }

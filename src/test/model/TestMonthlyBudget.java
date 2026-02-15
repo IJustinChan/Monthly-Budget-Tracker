@@ -19,9 +19,9 @@ public class TestMonthlyBudget {
     @BeforeEach
     void runBefore() {
         monthBudget = new MonthlyBudget(3, 2025);
-        job = new Income(1000, 1, 1, 2026, "Work", 0.1);
-        scholarship = new Income(2500, 5, 15, 2025, "Scholarship", 0);
-        scholarship2 = new Income(1500, 12, 12, 2024, "Scholarship", 0);
+        job = new Income(1000, 1, "Work", 0.1);
+        scholarship = new Income(2500, 15, "Scholarship", 0);
+        scholarship2 = new Income(1500, 12, "Scholarship", 0);
 
         rent = new Expense(2500, 11, 1, 2025, "Rent", "Need");
         netflixSubscription = new Expense(10, 3, 20, 2024, "Entertainment", "Want");

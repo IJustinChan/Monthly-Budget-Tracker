@@ -14,10 +14,6 @@ public class Income extends Transaction {
         amountAfterTax = incomeAfterTax(tax);
     }
 
-    public String getSource() {
-        return source;
-    }
-
     // EFFECTS: returns original amount if income has not been taxed otherwise returns
     //          the income amount after tax
     public int getAmount() {
@@ -31,18 +27,30 @@ public class Income extends Transaction {
     // REQUIRES: tax >= 0
     // EFFECTS: returns true if the income is taxed otherwise false
     public boolean checkIsTaxable(double tax) {
-        return false; // stub
+        if (tax > 0) {
+            return true;
+        }
+        return false;
     }
 
     // REQUIRES: tax >= 0
     // EFFECTS: calculates the income after tax has been applied
     //          returns original income if there is no tax
     public int incomeAfterTax(double tax) {
-        return 0; // stub
+        int taxAmount = (int) ((int) getOriginalAmount() * tax);
+        return getOriginalAmount() - taxAmount;
     }
 
-    public double getTaxAmount() {
+    public String getSource() {
+        return source;
+    }
+
+    public double getTax() {
         return tax;
+    }
+
+    public int getOriginalAmount() {
+        return amount;
     }
 
 }

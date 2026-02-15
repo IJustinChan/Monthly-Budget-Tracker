@@ -19,40 +19,60 @@ public class MonthlyBudget {
     }
 
     // EFFECTS: return the net income of the budget
-    public double getNetIncome() {
-        return -1; // stub
+    public int getNetIncome() {
+        return getTotalIncome() - getTotalExpenses();
     }
 
     // EFFECTS: returns the total amount of income
-    public double getTotalIncome() {
-        return -1; // stub
+    public int getTotalIncome() {
+        int total = 0;
+        for (Income income : allIncome) {
+            total += income.getAmount();
+        }
+        return total;
     }
 
     // EFFECTS: returns the total amount of expenses
-    public double getTotalExpenses() {
-        return -1; // stub
+    public int getTotalExpenses() {
+        int total = 0;
+        for (Expense expense : allExpenses) {
+            total += expense.getAmount();
+        }
+        return total;
     }
 
     // EFFECTS: returns all the Income that comes from given source
     public ArrayList<Income> getSameSourceIncome(String source) {
-        return null; // stub
+        ArrayList<Income> sameSourceIncome = new ArrayList<>();
+        for (Income income : allIncome) {
+            if (income.getSource().equals(source)) {
+                sameSourceIncome.add(income);
+            }
+        }
+        return sameSourceIncome;
     }
 
     // EFFECTS: returns all the Expense that belong in given category
-    public ArrayList<Income> getSameCategoryExpense(String category) {
-        return null; // stub
+    public ArrayList<Expense> getSameCategoryExpense(String category) {
+        ArrayList<Expense> sameCategoryExpense = new ArrayList<>();
+        for (Expense expense : allExpenses) {
+            if (expense.getCategory().equals(category)) {
+                sameCategoryExpense.add(expense);
+            }
+        }
+        return sameCategoryExpense;
     }
 
     // MODIFIES: this
     // EFFECTS: adds a new income to the list of all incomes
     public void addIncome(Income income) {
-        // stub
+        allIncome.add(income);
     }
     
     // MODIFIES: this
     // EFFECTS: adds a new expense to the list of all expenses
     public void addExpense(Expense expense) {
-        // stub
+        allExpenses.add(expense);
     }
 
     // REQURIES: 1 <= month <= 12 AND 1 <= day <= 31 AND year > 0, and amount > 0
@@ -60,7 +80,15 @@ public class MonthlyBudget {
     // EFFECTS: removes a income from all incomes that matches the date, amount and source
     //          If no income matches given requirements, nothing is removed
     public void removeIncome(int month, int day, int year, int amount, String source) {
-        // stub
+        int index = 0;
+        for (Income income : allIncome) {
+            if (income.getMonth() == month && income.getDay() == day && income.getYear() == year 
+            && income.getOriginalAmount() == amount && income.getSource().equals(source)) {
+                allIncome.remove(index);
+                break;
+            }
+            index++;
+        }
     }
 
     // REQURIES: 1 <= month <= 12 AND 1 <= day <= 31 AND year > 0, and amount > 0
@@ -68,7 +96,15 @@ public class MonthlyBudget {
     // EFFECTS: removes a expense from all expenses that matches the date, amount and category
     //          If no expense matches given requirements, nothing is removed
     public void removeExpense(int month, int day, int year, int amount, String category) {
-        // stub
+        int index = 0;
+        for (Expense expense : allExpenses) {
+            if (expense.getMonth() == month && expense.getDay() == day && expense.getYear() == year 
+            && expense.getAmount() == amount && expense.getCategory().equals(category)) {
+                allExpenses.remove(index);
+                break;
+            }
+            index++;
+        }
     }
 
     public int getMonth() {

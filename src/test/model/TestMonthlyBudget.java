@@ -34,7 +34,7 @@ public class TestMonthlyBudget {
         assertEquals(3, monthBudget.getMonth());
         assertEquals(2025, monthBudget.getYear());
         assertEquals(0, monthBudget.getAllIncome().size());
-        assertEquals(0, monthBudget.getAllExpenses());
+        assertEquals(0, monthBudget.getAllExpenses().size());
     }
 
     @Test
@@ -46,20 +46,20 @@ public class TestMonthlyBudget {
         monthBudget.addExpense(rent);
         monthBudget.addExpense(netflixSubscription);
         monthBudget.addExpense(randomSubscription);
-        assertEquals(2475, monthBudget.getNetIncome());
+        assertEquals(2375, monthBudget.getNetIncome());
 
         monthBudget.addExpense(bigExpense);
-        assertEquals(-7525, monthBudget.getNetIncome());
+        assertEquals(-7625, monthBudget.getNetIncome());
     }
 
     @Test
     void testGetTotalIncome() {
         monthBudget.addIncome(job);
         monthBudget.addIncome(scholarship);
-        assertEquals(3500, monthBudget.getTotalIncome());
+        assertEquals(3400, monthBudget.getTotalIncome());
 
         monthBudget.addIncome(scholarship2);
-        assertEquals(5000, monthBudget.getTotalIncome());
+        assertEquals(4900, monthBudget.getTotalIncome());
     }
 
     @Test

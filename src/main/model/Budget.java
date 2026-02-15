@@ -41,46 +41,58 @@ public class Budget {
 
     // EFFECTS: returns all the Income that comes from given source including incomes in scenario mode
     public ArrayList<Income> getSameSourceIncomeWithScenario(String source) {
-        return null; // stub
+        ArrayList<Income> scenarioIncomes = new ArrayList<>(currentMonthBudget.getSameSourceIncome(source));
+        for (Income income : scenarioAddOns.getAllIncome()) {
+            if (income.getSource().equals(source)) {
+                scenarioIncomes.add(income);
+            }
+        }
+        return scenarioIncomes;
     }
 
     // EFFECTS: returns all the Expense that belong in given category including expenses in scenario mode
     public ArrayList<Expense> getSameCategoryExpensesWithScenario(String category) {
-        return null; // stub
+        ArrayList<Expense> scenarioExpenses = new ArrayList<>(currentMonthBudget.getSameCategoryExpense(category));
+        for (Expense expense : scenarioAddOns.getAllExpenses()) {
+            if (expense.getCategory().equals(category)) {
+                scenarioExpenses.add(expense);
+            }
+        }
+        return scenarioExpenses;
     }
 
     // MODIFIES: this
     // EFFECTS: adds a income into the scenario mode
-    public void scenarioAddIncome() {
-        // stub
+    public void scenarioAddIncome(Income income) {
+        scenarioAddOns.addIncome(income);
     }
 
     // MODIFIES: this
     // EFFECTS: adds a expense into the scenario mode
-    public void scenarioAddExpense() {
-        // stub
+    public void scenarioAddExpense(Expense expense) {
+        scenarioAddOns.addExpense(expense);
     }
 
     // REQUIRES: 1 <= day <= 31 AND amount > 0
     // MODIFIES: this
     // EFFECTS: removes a income from the scenario mode
     public void scenarioRemoveIncome(int day, int amount, String source) {
-        // stub
+        scenarioAddOns.removeIncome(day, amount, source);
     }
 
     // REQUIRES: 1 <= day <= 31 AND amount > 0
     // MODIFIES: this
     // EFFECTS: removes a expense from the scenario mode
     public void scenarioRemoveExpense(int day, int amount, String category) {
-        // stub
+        scenarioAddOns.removeExpense(day, amount, category);
     }
 
     public ArrayList<Income> scenarioGetAllIncome() {
-        return null; // stub
+        return scenarioAddOns.getAllIncome();
     }
 
     public ArrayList<Expense> scenarioGetAllExpense() {
-        return null; // stub
+        return scenarioAddOns.getAllExpenses();
     }
 
     // MODIFIES: this

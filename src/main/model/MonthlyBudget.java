@@ -82,7 +82,7 @@ public class MonthlyBudget {
     public void removeIncome(int day, int amount, String source) {
         int index = 0;
         for (Income income : allIncome) {
-            if (income.getDay() == day  && income.getOriginalAmount() == amount 
+            if (income.getDay() == day && income.getOriginalAmount() == amount 
             && income.getSource().equals(source)) {
                 allIncome.remove(index);
                 break;

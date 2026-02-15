@@ -53,4 +53,5 @@ public class Income extends Transaction {
         return amount;
     }
 
+    
 }

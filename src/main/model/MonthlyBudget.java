@@ -75,11 +75,11 @@ public class MonthlyBudget {
         allExpenses.add(expense);
     }
 
-    // REQURIES: 1 <= month <= 12 AND 1 <= day <= 31 AND year > 0, and amount > 0
+    // REQUIRES: 1 <= day <= 31 AND amount > 0
     // MODIFIES: this
-    // EFFECTS: removes a income from all incomes that matches the date, amount and source
+    // EFFECTS: removes a income from all incomes that matches the day, amount and source
     //          If no income matches given requirements, nothing is removed
-    public void removeIncome(int month, int day, int year, int amount, String source) {
+    public void removeIncome(int day, int amount, String source) {
         int index = 0;
         for (Income income : allIncome) {
             if (income.getDay() == day  && income.getOriginalAmount() == amount 
@@ -91,11 +91,11 @@ public class MonthlyBudget {
         }
     }
 
-    // REQURIES: 1 <= month <= 12 AND 1 <= day <= 31 AND year > 0, and amount > 0
+    // REQUIRES: 1 <= day <= 31 AND amount > 0
     // MODIFIES: this
-    // EFFECTS: removes a expense from all expenses that matches the date, amount and category
+    // EFFECTS: removes a expense from all expenses that matches the day, amount and category
     //          If no expense matches given requirements, nothing is removed
-    public void removeExpense(int month, int day, int year, int amount, String category) {
+    public void removeExpense(int day, int amount, String category) {
         int index = 0;
         for (Expense expense : allExpenses) {
             if (expense.getDay() == day && expense.getAmount() == amount 

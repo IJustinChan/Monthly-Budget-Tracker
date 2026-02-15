@@ -24,21 +24,76 @@ public class Budget {
         scenarioAddOns = new MonthlyBudget(month, year);
     }
 
+    // EFFECTS: returns the net income including the net incomes from scenario mode
+    public int getNetIncomeWithScenario() {
+        return currentMonthBudget.getNetIncome() + scenarioAddOns.getNetIncome();
+    }
+
+    // EFFECTS: returns the total expense amount including the expenses from scenario moade
+    public int getTotalExpensesWithScenario() {
+        return currentMonthBudget.getTotalExpenses() + scenarioAddOns.getTotalExpenses();
+    }
+
+    // EFFECTS: returns the total income aount including the incomes from scenario mode
+    public int getTotalIncomeWithScenario() {
+        return currentMonthBudget.getNetIncome() + scenarioAddOns.getNetIncome();
+    }
+
+    // EFFECTS: returns all the Income that comes from given source including incomes in scenario mode
+    public ArrayList<Income> getSameSourceIncomeWithScenario(String source) {
+        return null; // stub
+    }
+
+    // EFFECTS: returns all the Expense that belong in given category including expenses in scenario mode
+    public ArrayList<Expense> getSameCategoryExpensesWithScenario(String category) {
+        return null; // stub
+    }
+
+    // MODIFIES: this
+    // EFFECTS: adds a income into the scenario mode
+    public void scenarioAddIncome() {
+        // stub
+    }
+
+    // MODIFIES: this
+    // EFFECTS: adds a expense into the scenario mode
+    public void scenarioAddExpense() {
+        // stub
+    }
+
+    // REQUIRES: 1 <= day <= 31 AND amount > 0
+    // MODIFIES: this
+    // EFFECTS: removes a income from the scenario mode
+    public void scenarioRemoveIncome(int day, int amount, String source) {
+        // stub
+    }
+
+    // REQUIRES: 1 <= day <= 31 AND amount > 0
+    // MODIFIES: this
+    // EFFECTS: removes a expense from the scenario mode
+    public void scenarioRemoveExpense(int day, int amount, String category) {
+        // stub
+    }
+
+    public ArrayList<Income> scenarioGetAllIncome() {
+        return null; // stub
+    }
+
+    public ArrayList<Expense> scenarioGetAllExpense() {
+        return null; // stub
+    }
+
     // MODIFIES: this
     // EFFECTS: removes all added incomes and expenses in the scenario version
     public void resetScenarioAddOns() {
-        scenarioAddOns = new MonthlyBudget(scenarioAddOns.getMonth(), scenarioAddOns.getYear());
+        scenarioAddOns = new MonthlyBudget(month, year);
     }
 
     public MonthlyBudget getCurrentMonthBudget() {
         return currentMonthBudget;
     }
 
-    public void setCurrentMonthBudget(MonthlyBudget currentMonth) {
-        currentMonthBudget = currentMonth;
-    }
-
-    public void setInScenarioMode(boolean isUsingScenarioMode) {
+    public void setIsInScenarioMode(boolean isUsingScenarioMode) {
         isInScenarioMode = isUsingScenarioMode;
     }
 

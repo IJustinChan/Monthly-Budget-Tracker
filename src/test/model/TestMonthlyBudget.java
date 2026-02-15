@@ -134,7 +134,7 @@ public class TestMonthlyBudget {
         monthBudget.addIncome(job);
         monthBudget.addIncome(scholarship);
 
-        monthBudget.removeIncome(1, 1, 2026, 1000, "Work");
+        monthBudget.removeIncome(1, 1000, "Work");
         assertEquals(1, monthBudget.getAllIncome().size());
         assertEquals(2500, monthBudget.getAllIncome().get(0).getOriginalAmount());
     }
@@ -144,7 +144,7 @@ public class TestMonthlyBudget {
         monthBudget.addExpense(rent);
         monthBudget.addExpense(netflixSubscription);
 
-        monthBudget.removeExpense(3, 20, 2024, 10, "Entertainment");
+        monthBudget.removeExpense(20, 10, "Entertainment");
         assertEquals(1, monthBudget.getAllExpenses().size());
         assertEquals(2500, monthBudget.getAllExpenses().get(0).getAmount());
     }

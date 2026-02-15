@@ -23,10 +23,10 @@ public class TestMonthlyBudget {
         scholarship = new Income(2500, 15, "Scholarship", 0);
         scholarship2 = new Income(1500, 12, "Scholarship", 0);
 
-        rent = new Expense(2500, 11, 1, 2025, "Rent", "Need");
-        netflixSubscription = new Expense(10, 3, 20, 2024, "Entertainment", "Want");
-        randomSubscription = new Expense(15, 7, 16, 2024, "Entertainment", "Want");
-        bigExpense = new Expense(10000, 2, 1, 2024, "Transportation", "Need");
+        rent = new Expense(2500, 1, "Rent", "Need");
+        netflixSubscription = new Expense(10, 20, "Entertainment", "Want");
+        randomSubscription = new Expense(15, 16, "Entertainment", "Want");
+        bigExpense = new Expense(10000, 1, "Transportation", "Need");
     }
 
     @Test

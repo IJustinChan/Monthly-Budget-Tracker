@@ -8,7 +8,7 @@ public class Expense extends Transaction {
     
     // REQUIRES: amount > 0 AND 1 <= month <= 12 AND 1 <= day <= 31 AND year > 0
     //           necessityType is one of "needs" or "wants"
-    public Expense(int amount, int month, int day, int year, String category, String necessityType) {
+    public Expense(int amount, int day, String category, String necessityType) {
         super(amount, day);
         this.category = category;
         this.necessityType = necessityType;

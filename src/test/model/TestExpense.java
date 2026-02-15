@@ -11,8 +11,8 @@ public class TestExpense {
 
     @BeforeEach
     void runBefore() {
-        rent = new Expense(2500, 11, 1, 2025, "Rent", "Need");
-        netflixSubscription = new Expense(10, 3, 20, 2024, "Entertainment", "Want");
+        rent = new Expense(2500, 1, "Rent", "Need");
+        netflixSubscription = new Expense(10, 20, "Entertainment", "Want");
     }
 
     @Test

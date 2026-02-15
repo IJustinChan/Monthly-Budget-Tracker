@@ -17,7 +17,7 @@ public class Expense extends Transaction {
     // REQUIRES: total > 0
     // EFFECTS: returns the decimal percentage of how much this expense makes in total monthly expenses
     public double impactOnMonthlyTotal(int total) {
-        return -1; // stub
+        return (double) getAmount()/total;
     }
 
     public void setCategory(String category) {

@@ -27,8 +27,11 @@ public class TestExpense {
 
     @Test
     void testImpactOnMonthlyTotal() {
-        assertEquals(0.5, netflixSubscription.impactOnMonthlyTotal(20));
-        assertEquals(0.01, netflixSubscription.impactOnMonthlyTotal(1000));
+        // impactOnMonthlyTotal() returns a double so we need to add a delta (tolerance) to allow
+        // close enough decimal approximations to pass the test
+        assertEquals(0.5, netflixSubscription.impactOnMonthlyTotal(20), 0.01);
+        assertEquals(0.01, netflixSubscription.impactOnMonthlyTotal(1000), 0.01);
+        assertEquals(0.03, netflixSubscription.impactOnMonthlyTotal(333), 0.01);
     }
 
 }

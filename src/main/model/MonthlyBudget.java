@@ -113,7 +113,7 @@ public class MonthlyBudget {
         int index = 0;
         for (Expense expense : allExpenses) {
             if (expense.getDay() == oldDay && expense.getAmount() == oldAmount 
-                        && expense.getCategory().equals(newCategory)) {
+                        && expense.getCategory().equals(oldCategory)) {
                 Expense expenseToUpdate = allExpenses.get(index);
                 expenseToUpdate.setAmount(newAmount);
                 expenseToUpdate.setDay(newDay);

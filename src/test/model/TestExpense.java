@@ -32,4 +32,12 @@ public class TestExpense {
         assertEquals(0.03, netflixSubscription.impactOnMonthlyTotal(333), 0.01);
     }
 
+    @Test
+    void testParentAbstractClass() {
+        rent.setAmount(3000);
+        rent.setDay(30);
+        assertEquals(3000, rent.getAmount());
+        assertEquals(30, rent.getDay());
+    }
+
 }

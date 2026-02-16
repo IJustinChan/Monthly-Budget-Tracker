@@ -132,10 +132,8 @@ public class TestMonthlyBudget {
         monthBudget.addExpense(rent);
         monthBudget.addExpense(netflixSubscription);
 
-        rent = new Expense(2500, 1, "Rent", "Need");
         monthBudget.updateExpense(1, 2500, "Rent", 30, 3000, "Rent");
 
-        // monthBudget.updateExpense(20, 10, "Entertainment", 3, 17, "for fun");
         assertEquals(2, monthBudget.getAllExpenses().size());
         assertEquals(3000, monthBudget.getAllExpenses().get(0).getAmount());
         assertEquals(30, monthBudget.getAllExpenses().get(0).getDay());

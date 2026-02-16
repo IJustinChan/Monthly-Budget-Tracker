@@ -61,7 +61,7 @@ public class MonthlyBudget {
         int index = 0;
         for (Income income : allIncome) {
             if (income.getDay() == day && income.getOriginalAmount() == amount 
-            && income.getSource().equals(source)) {
+                       && income.getSource().equals(source)) {
                 allIncome.remove(index);
                 break;
             }
@@ -77,7 +77,7 @@ public class MonthlyBudget {
         int index = 0;
         for (Expense expense : allExpenses) {
             if (expense.getDay() == day && expense.getAmount() == amount 
-            && expense.getCategory().equals(category)) {
+                        && expense.getCategory().equals(category)) {
                 allExpenses.remove(index);
                 break;
             }
@@ -93,7 +93,7 @@ public class MonthlyBudget {
         int index = 0;
         for (Income income : allIncome) {
             if (income.getDay() == oldDay && income.getOriginalAmount() == oldAmount 
-            && income.getSource().equals(oldSource)) {
+                       && income.getSource().equals(oldSource)) {
                 Income incomeToUpdate = allIncome.get(index);
                 incomeToUpdate.setAmount(newAmount);
                 incomeToUpdate.setDay(newDay);
@@ -108,11 +108,12 @@ public class MonthlyBudget {
     // MODIFIES: this
     // EFFECTS: updates a expense from all expenses that matches the day, amount and category with its new information
     //          If no expense matches given requirements, nothing is updated
-    public void updateExpense(int oldDay, int oldAmount, String oldCategory, int newDay, int newAmount, String newCategory) {
+    public void updateExpense(int oldDay, int oldAmount, String oldCategory, int newDay, 
+              int newAmount, String newCategory) {
         int index = 0;
         for (Expense expense : allExpenses) {
             if (expense.getDay() == oldDay && expense.getAmount() == oldAmount 
-            && expense.getCategory().equals(newCategory)) {
+                        && expense.getCategory().equals(newCategory)) {
                 Expense expenseToUpdate = allExpenses.get(index);
                 expenseToUpdate.setAmount(newAmount);
                 expenseToUpdate.setDay(newDay);

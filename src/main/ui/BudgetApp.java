@@ -79,8 +79,7 @@ public class BudgetApp {
             currentMenu = "Scenario mode";
         } else if (command == 3) {
             displayMonthlyBudgetSummary();
-        }
-        else {
+        } else {
             keepGoing = false;
         }
     }
@@ -226,7 +225,8 @@ public class BudgetApp {
     // EFFECTS: Writes out the contents of the expense from a ArrayList containing Expense
     private void writeExpenseArrayListContent(ArrayList<Expense> expenseList) {
         for (Expense expense : expenseList) {
-            System.out.println("Day " + expense.getDay() + ": " + expense.getCategory() + " - " + "$" + expense.getAmount());
+            System.out.println(
+                    "Day " + expense.getDay() + ": " + expense.getCategory() + " - " + "$" + expense.getAmount());
         }
     }
 

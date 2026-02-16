@@ -41,6 +41,15 @@ public class Income extends Transaction {
         return getOriginalAmount() - taxAmount;
     }
 
+    public void setAmount(int newAmount) {
+        amount = newAmount;
+        amountAfterTax = incomeAfterTax(tax);
+    }
+
+    public void setSource(String newSource) {
+        source = newSource;
+    }
+
     public String getSource() {
         return source;
     }

@@ -39,28 +39,6 @@ public class Budget {
         return currentMonthBudget.getNetIncome() + scenarioAddOns.getNetIncome();
     }
 
-    // EFFECTS: returns all the Income that comes from given source including incomes in scenario mode
-    public ArrayList<Income> getSameSourceIncomeWithScenario(String source) {
-        ArrayList<Income> scenarioIncomes = new ArrayList<>(currentMonthBudget.getSameSourceIncome(source));
-        for (Income income : scenarioAddOns.getAllIncome()) {
-            if (income.getSource().equals(source)) {
-                scenarioIncomes.add(income);
-            }
-        }
-        return scenarioIncomes;
-    }
-
-    // EFFECTS: returns all the Expense that belong in given category including expenses in scenario mode
-    public ArrayList<Expense> getSameCategoryExpensesWithScenario(String category) {
-        ArrayList<Expense> scenarioExpenses = new ArrayList<>(currentMonthBudget.getSameCategoryExpense(category));
-        for (Expense expense : scenarioAddOns.getAllExpenses()) {
-            if (expense.getCategory().equals(category)) {
-                scenarioExpenses.add(expense);
-            }
-        }
-        return scenarioExpenses;
-    }
-
     // MODIFIES: this
     // EFFECTS: adds a income into the scenario mode
     public void scenarioAddIncome(Income income) {
@@ -103,6 +81,10 @@ public class Budget {
 
     public MonthlyBudget getCurrentMonthBudget() {
         return currentMonthBudget;
+    }
+
+    public MonthlyBudget getScenarioAddOns() {
+        return scenarioAddOns;
     }
 
     public void setIsInScenarioMode(boolean isUsingScenarioMode) {

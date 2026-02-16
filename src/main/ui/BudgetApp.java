@@ -3,21 +3,26 @@ package ui;
 import model.Budget;
 import model.Expense;
 import model.Income;
-import model.MonthlyBudget;
+
+import java.util.ArrayList;
 
 import java.util.Scanner;
 
+// Monthly budget application
 public class BudgetApp {
     private Scanner input;
     private Budget budget;
     private String currentMenu = "Main menu";
     private boolean keepGoing = true;
 
+    // EFFECTS: runs the budget app
     public BudgetApp() {
         budget = new Budget();
         runBudget();
     }
 
+    // MOFIDIES: this
+    // EFFECTS: gets user input and processes it
     private void runBudget() {
         int command;
 
@@ -49,6 +54,8 @@ public class BudgetApp {
         System.out.println("Thanks for using this budget application!");
     }
 
+    // MODIFIES: this
+    // EFFECTS: initalizes the budget app object
     private void init() {
         input = new Scanner(System.in);
 
@@ -62,20 +69,25 @@ public class BudgetApp {
 
     }
 
+    // REQUIRES: 1 <= command <= 4
+    // MODIFIES: this
+    // EFFECTS: handles the user input for when the user is on the main menu
     private void processMainMenu(int command) {
         if (command == 1) {
             currentMenu = "Monthly budget";
         } else if (command == 2) {
             currentMenu = "Scenario mode";
         } else if (command == 3) {
-            // write the monthly budget summary
+            displayMonthlyBudgetSummary();
         }
-        
         else {
             keepGoing = false;
         }
     }
 
+    // REQUIRES: 1 <= command <= 10
+    // MODIFIES: this
+    // EFFECTS: handles user input for when the user is working on the monthly budget
     private void processMonthlyBudgetMenu(int command) {
         if (command == 1) {
             Income income = getNewIncome();
@@ -84,33 +96,54 @@ public class BudgetApp {
             Expense expense = getNewExpense();
             budget.getCurrentMonthBudget().addExpense(expense);
         } else if (command == 3) {
-            System.out.println(budget.getCurrentMonthBudget().getNetIncome());
+            System.out.println("Net income: " + budget.getCurrentMonthBudget().getNetIncome());
         } else if (command == 4) {
-            System.out.println(budget.getCurrentMonthBudget().getTotalIncome());
+            System.out.println("Total income: " + budget.getCurrentMonthBudget().getTotalIncome());
         } else if (command == 5) {
-            System.out.println(budget.getCurrentMonthBudget().getTotalExpenses());
+            System.out.println("Total expenses: " + budget.getCurrentMonthBudget().getTotalExpenses());
         } else if (command == 6) {
-
+            updateMonthlyBudgetIncome();
         } else if (command == 7) {
-
+            updateMonthlyBudgetExpense();
         } else if (command == 8) {
-
+            deleteMonthlyBudgetIncome();
         } else if (command == 9) {
-
-        } else if (command == 10) {
-            
-        } else if (command == 11) {
-
+            deleteMonthlyBudgetExpense();
         } else {
             currentMenu = "Main menu";
         }
     }
 
+    // REQUIRES: 1 <= command <= 10
+    // MODIFIES: this
+    // EFFECTS: handles user input when the user is in scenario mode
     private void processScenarioModeMenu(int command) {
-        // stub
+        if (command == 1) {
+            Income income = getNewIncome();
+            budget.scenarioAddIncome(income);
+        } else if (command == 2) {
+            Expense expense = getNewExpense();
+            budget.scenarioAddExpense(expense);
+        } else if (command == 3) {
+            System.out.println("Net income: " + budget.getNetIncomeWithScenario());
+        } else if (command == 4) {
+            System.out.println("Total income: " + budget.getTotalIncomeWithScenario());
+        } else if (command == 5) {
+            System.out.println("Total expenses: " + budget.getTotalExpensesWithScenario());
+        } else if (command == 6) {
+            updateScenarioBudgetIncome();
+        } else if (command == 7) {
+            updateScenarioBudgetExpense();
+        } else if (command == 8) {
+            deleteScenarioBudgetIncome();
+        } else if (command == 9) {
+            deleteScenarioBudgetExpense();
+        } else {
+            currentMenu = "Main menu";
+        }
     }
 
-    // displays menu of options to the user
+    // EFFECTS: displays main menu of options to the user
     private void displayMainMenu() {
         System.out.println("Select one of the following actions by typing the number: ");
         System.out.println("1. Edit the monthly budget");
@@ -119,6 +152,7 @@ public class BudgetApp {
         System.out.println("4. Exit application");
     }
 
+    // EFFECTS: displays options for the user when the user is editing the monthly budget
     private void displayMonthlyBudgetMenu() {
         System.out.println("Select one of the following actions by typing the number: ");
         System.out.println("1. Add a new income");
@@ -126,15 +160,14 @@ public class BudgetApp {
         System.out.println("3. Get net income");
         System.out.println("4. Get total income");
         System.out.println("5. Get total expense");
-        System.out.println("6. Get all income that come from same source");
-        System.out.println("7. Get all expense that belong in same category");
-        System.out.println("8. Update an income");
-        System.out.println("9. Update a expense");
-        System.out.println("10. Remove an income");
-        System.out.println("11. Remove a expense");
-        System.out.println("12. Exit to main menu");
+        System.out.println("6. Update an income");
+        System.out.println("7. Update a expense");
+        System.out.println("8. Remove an income");
+        System.out.println("9. Remove a expense");
+        System.out.println("10. Exit to main menu");
     }
 
+    // EFFECTS: displays options for the user when the user is in scenario mode
     private void displayScenarioModeMenu() {
         System.out.println("Select one of the following actions by typing the number: ");
         System.out.println("1. Add a new income scenario");
@@ -142,16 +175,15 @@ public class BudgetApp {
         System.out.println("3. Get scenario net income");
         System.out.println("4. Get scenario total income");
         System.out.println("5. Get scenario total expense");
-        System.out.println("6. Get all income that come from same source");
-        System.out.println("7. Get all expense that belong in same category");
-        System.out.println("8. Update a scenario income");
-        System.out.println("9. Update a scenario expense");
-        System.out.println("10. Remove a scenario income");
-        System.out.println("11. Remove a scenario expense");
-        System.out.println("12. Exit to main menu");
+        System.out.println("6. Update a scenario income");
+        System.out.println("7. Update a scenario expense");
+        System.out.println("8. Remove a scenario income");
+        System.out.println("9. Remove a scenario expense");
+        System.out.println("10. Exit to main menu");
     }
 
-    public Income getNewIncome() {
+    // EFFECTS: creates a new Income object based on user input
+    private Income getNewIncome() {
         System.out.println("Enter the amount of money for the income: ");
         int amount = input.nextInt();
 
@@ -167,7 +199,8 @@ public class BudgetApp {
         return new Income(amount, day, source, tax);
     }
 
-    public Expense getNewExpense() {
+    // EFFECTS: creates a new Expense object based on user input
+    private Expense getNewExpense() {
         System.out.println("Enter the amount of money for the expense: ");
         int amount = input.nextInt();
 
@@ -175,9 +208,204 @@ public class BudgetApp {
         int day = input.nextInt();
 
         System.out.println("Enter the category of that expense: ");
+        String category = input.next();
+
+        System.out.println("Enter if this expense is a need or want: ");
+        String necessity = input.next();
+
+        return new Expense(amount, day, category, necessity);
+    }
+
+    // EFFECTS: Writes out the contents of the income from a ArrayList containing Income
+    private void writeIncomeArrayListContent(ArrayList<Income> incomeList) {
+        for (Income income : incomeList) {
+            System.out.println("Day " + income.getDay() + ": " + income.getSource() + " - " + "$" + income.getAmount());
+        }
+    }
+
+    // EFFECTS: Writes out the contents of the expense from a ArrayList containing Expense
+    private void writeExpenseArrayListContent(ArrayList<Expense> expenseList) {
+        for (Expense expense : expenseList) {
+            System.out.println("Day " + expense.getDay() + ": " + expense.getCategory() + " - " + "$" + expense.getAmount());
+        }
+    }
+
+    // EFFECTS: Writes out all the income and expense the user has in their monthly budget
+    private void displayMonthlyBudgetSummary() {
+        System.out.println("Income summary: ");
+        writeIncomeArrayListContent(budget.getCurrentMonthBudget().getAllIncome());
+        System.out.println("Expense summary: ");
+        writeExpenseArrayListContent(budget.getCurrentMonthBudget().getAllExpenses());
+    }
+
+    // MODIFIES: this
+    // EFFECTS: deletes a income from the user's monthly budget
+    //          no income is deleted if no income matches user specifications
+    private void deleteMonthlyBudgetIncome() {
+        System.out.println("Enter the amount of money for the income before tax: ");
+        int amount = input.nextInt();
+
+        System.out.println("Enter the day the income was earned: ");
+        int day = input.nextInt();
+
+        System.out.println("Enter the source of that income: ");
         String source = input.next();
 
-        return new Expense(amount, day, source, source);
+        budget.getCurrentMonthBudget().removeIncome(day, amount, source);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: deletes a expense from the user's monthly budget
+    //          no expense is deleted if no expense matches user specifications
+    private void deleteMonthlyBudgetExpense() {
+        System.out.println("Enter the amount of money for the expense: ");
+        int amount = input.nextInt();
+
+        System.out.println("Enter the day the expense occurred: ");
+        int day = input.nextInt();
+
+        System.out.println("Enter the category of that expense: ");
+        String category = input.next();
+
+        budget.getCurrentMonthBudget().removeExpense(day, amount, category);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: deletes a income from the user's scenario mode
+    //          no income is deleted if no income in scenario mode matches user specifications
+    private void deleteScenarioBudgetIncome() {
+        System.out.println("Enter the amount of money for the income before tax: ");
+        int amount = input.nextInt();
+
+        System.out.println("Enter the day the income was earned: ");
+        int day = input.nextInt();
+
+        System.out.println("Enter the source of that income: ");
+        String source = input.next();
+
+        budget.scenarioRemoveIncome(day, amount, source);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: deletes a expense from the user's scenario mode
+    //          no expense is deleted if no expense in scenario mode matches user specifications
+    private void deleteScenarioBudgetExpense() {
+        System.out.println("Enter the amount of money for the expense: ");
+        int amount = input.nextInt();
+
+        System.out.println("Enter the day the expense occurred: ");
+        int day = input.nextInt();
+
+        System.out.println("Enter the category of that expense: ");
+        String category = input.next();
+
+        budget.scenarioRemoveExpense(day, amount, category);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: updates a user's income from their monthly budget
+    //          no income is updated if no income matches the user's specifications
+    private void updateMonthlyBudgetIncome() {
+        System.out.println("To update information, enter the original information then enter the new information.");
+        System.out.println("Enter the original amount of money for the income before tax: ");
+        int oldAmount = input.nextInt();
+
+        System.out.println("Enter the original day the income was earned: ");
+        int oldDay = input.nextInt();
+
+        System.out.println("Enter the original source of that income: ");
+        String oldSource = input.next();
+
+        System.out.println("Enter the new amount of money for the income: ");
+        int newAmount = input.nextInt();
+
+        System.out.println("Enter the new day the income was earned: ");
+        int newDay = input.nextInt();
+
+        System.out.println("Enter the new source of that income: ");
+        String newSource = input.next();
+
+        budget.getCurrentMonthBudget().updateIncome(oldDay, oldAmount, oldSource, newDay, newAmount, newSource);
+
+    }
+
+    // MODIFIES: this
+    // EFFECTS: updates a user's expense from their monthly budget
+    //          no expense is updated if no expense matches the user's specifications
+    private void updateMonthlyBudgetExpense() {
+        System.out.println("To update information, enter the original information then enter the new information.");
+        System.out.println("Enter the original amount of money for the expense: ");
+        int oldAmount = input.nextInt();
+
+        System.out.println("Enter the original day the expense occurred: ");
+        int oldDay = input.nextInt();
+
+        System.out.println("Enter the original category of that expense: ");
+        String oldCategory = input.next();
+
+        System.out.println("Enter the new amount of money for the expense: ");
+        int newAmount = input.nextInt();
+
+        System.out.println("Enter the new day the expense occurred: ");
+        int newDay = input.nextInt();
+
+        System.out.println("Enter the new category of that expense: ");
+        String newCategory = input.next();
+
+        budget.getCurrentMonthBudget().updateExpense(oldDay, oldAmount, oldCategory, newDay, newAmount, newCategory);
+
+    }
+
+    // MODIFIES: this
+    // EFFECTS: updates a user's income from their scenario mode
+    //          no income is updated if no income in scenario mode matches the user's specifications
+    private void updateScenarioBudgetIncome() {
+        System.out.println("To update information, enter the original information then enter the new information.");
+        System.out.println("Enter the original amount of money for the income before tax: ");
+        int oldAmount = input.nextInt();
+
+        System.out.println("Enter the original day the income was earned: ");
+        int oldDay = input.nextInt();
+
+        System.out.println("Enter the original source of that income: ");
+        String oldSource = input.next();
+
+        System.out.println("Enter the new amount of money for the income: ");
+        int newAmount = input.nextInt();
+
+        System.out.println("Enter the new day the income was earned: ");
+        int newDay = input.nextInt();
+
+        System.out.println("Enter the new source of that income: ");
+        String newSource = input.next();
+
+        budget.getScenarioAddOns().updateIncome(oldDay, oldAmount, oldSource, newDay, newAmount, newSource);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: updates a user's expense from their scenario mode
+    //          no expense is updated if no expense in scenario mode matches the user's specifications
+    private void updateScenarioBudgetExpense() {
+        System.out.println("To update information, enter the original information then enter the new information.");
+        System.out.println("Enter the original amount of money for the expense: ");
+        int oldAmount = input.nextInt();
+
+        System.out.println("Enter the original day the expense occurred: ");
+        int oldDay = input.nextInt();
+
+        System.out.println("Enter the original category of that expense: ");
+        String oldCategory = input.next();
+
+        System.out.println("Enter the new amount of money for the expense: ");
+        int newAmount = input.nextInt();
+
+        System.out.println("Enter the new day the expense occurred: ");
+        int newDay = input.nextInt();
+
+        System.out.println("Enter the new category of that expense: ");
+        String newCategory = input.next();
+
+        budget.getScenarioAddOns().updateExpense(oldDay, oldAmount, oldCategory, newDay, newAmount, newCategory);
     }
 
 }

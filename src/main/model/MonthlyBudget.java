@@ -41,28 +41,6 @@ public class MonthlyBudget {
         return total;
     }
 
-    // EFFECTS: returns all the Income that comes from given source
-    public ArrayList<Income> getSameSourceIncome(String source) {
-        ArrayList<Income> sameSourceIncome = new ArrayList<>();
-        for (Income income : allIncome) {
-            if (income.getSource().equals(source)) {
-                sameSourceIncome.add(income);
-            }
-        }
-        return sameSourceIncome;
-    }
-
-    // EFFECTS: returns all the Expense that belong in given category
-    public ArrayList<Expense> getSameCategoryExpense(String category) {
-        ArrayList<Expense> sameCategoryExpense = new ArrayList<>();
-        for (Expense expense : allExpenses) {
-            if (expense.getCategory().equals(category)) {
-                sameCategoryExpense.add(expense);
-            }
-        }
-        return sameCategoryExpense;
-    }
-
     // MODIFIES: this
     // EFFECTS: adds a new income to the list of all incomes
     public void addIncome(Income income) {
@@ -101,6 +79,44 @@ public class MonthlyBudget {
             if (expense.getDay() == day && expense.getAmount() == amount 
             && expense.getCategory().equals(category)) {
                 allExpenses.remove(index);
+                break;
+            }
+            index++;
+        }
+    }
+
+    // REQUIRES: 1 <= oldDay <= 31 AND oldAmount > 0, AND 1 <= newDay <= 31 AND newAmount
+    // MODIFIES: this
+    // EFFECTS: updates a income from all incomes that matches the day, amount and source with its new information
+    //          If no income matches given requirements, nothing is updated
+    public void updateIncome(int oldDay, int oldAmount, String oldSource, int newDay, int newAmount, String newSource) {
+        int index = 0;
+        for (Income income : allIncome) {
+            if (income.getDay() == oldDay && income.getOriginalAmount() == oldAmount 
+            && income.getSource().equals(oldSource)) {
+                Income incomeToUpdate = allIncome.get(index);
+                incomeToUpdate.setAmount(newAmount);
+                incomeToUpdate.setDay(newDay);
+                incomeToUpdate.setSource(newSource);
+                break;
+            }
+            index++;
+        }
+    }
+
+    // REQUIRES: 1 <= oldDay <= 31 AND oldAmount > 0, AND 1 <= newDay <= 31 AND newAmount
+    // MODIFIES: this
+    // EFFECTS: updates a expense from all expenses that matches the day, amount and category with its new information
+    //          If no expense matches given requirements, nothing is updated
+    public void updateExpense(int oldDay, int oldAmount, String oldCategory, int newDay, int newAmount, String newCategory) {
+        int index = 0;
+        for (Expense expense : allExpenses) {
+            if (expense.getDay() == oldDay && expense.getAmount() == oldAmount 
+            && expense.getCategory().equals(newCategory)) {
+                Expense expenseToUpdate = allExpenses.get(index);
+                expenseToUpdate.setAmount(newAmount);
+                expenseToUpdate.setDay(newDay);
+                expenseToUpdate.setCategory(newCategory);
                 break;
             }
             index++;

@@ -73,40 +73,6 @@ public class TestMonthlyBudget {
     }
 
     @Test
-    void testGetSameSourceIncome() {
-        monthBudget.addIncome(job);
-        monthBudget.addIncome(scholarship);
-        monthBudget.addIncome(scholarship2);
-
-        assertEquals(0, monthBudget.getSameSourceIncome("Student loan").size());
-
-        assertEquals(1, monthBudget.getSameSourceIncome("Work").size());
-        assertEquals(1000, monthBudget.getSameSourceIncome("Work").get(0).getOriginalAmount());
-
-        assertEquals(2, monthBudget.getSameSourceIncome("Scholarship").size());
-        assertEquals(2500, monthBudget.getSameSourceIncome("Scholarship").get(0).getOriginalAmount());
-        assertEquals(1500, monthBudget.getSameSourceIncome("Scholarship").get(1).getOriginalAmount());
-    }
-
-    @Test
-    void testGetSameCategoryExpense() {
-        monthBudget.addExpense(rent);
-        monthBudget.addExpense(netflixSubscription);
-        monthBudget.addExpense(randomSubscription);
-        monthBudget.addExpense(bigExpense);
-
-        assertEquals(0, monthBudget.getSameCategoryExpense("Food").size());
-
-        assertEquals(1, monthBudget.getSameCategoryExpense("Rent").size());
-        assertEquals(2500, monthBudget.getSameCategoryExpense("Rent").get(0).getAmount());
-
-        assertEquals(2, monthBudget.getSameCategoryExpense("Entertainment").size());
-        assertEquals(10, monthBudget.getSameCategoryExpense("Entertainment").get(0).getAmount());
-        assertEquals(15, monthBudget.getSameCategoryExpense("Entertainment").get(1).getAmount());
-        
-    }
-
-    @Test
     void testAddIncome() {
         monthBudget.addIncome(job);
         assertEquals(1, monthBudget.getAllIncome().size());

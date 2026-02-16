@@ -33,6 +33,16 @@ public class TestExpense {
     }
 
     @Test
+    void testSetters() {
+        netflixSubscription.setCategory("for fun");
+        netflixSubscription.setNecessityType("Need");
+
+        assertEquals("for fun", netflixSubscription.getCategory());
+        assertEquals("Need", netflixSubscription.getNecessityType());
+
+    }
+
+    @Test
     void testParentAbstractClass() {
         rent.setAmount(3000);
         rent.setDay(30);

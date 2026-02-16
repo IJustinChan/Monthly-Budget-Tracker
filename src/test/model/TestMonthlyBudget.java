@@ -114,6 +114,33 @@ public class TestMonthlyBudget {
         assertEquals(1, monthBudget.getAllExpenses().size());
         assertEquals(2500, monthBudget.getAllExpenses().get(0).getAmount());
     }
+
+    @Test
+    void testUpdateIncome() {
+        monthBudget.addIncome(job);
+        monthBudget.addIncome(scholarship);
+
+        monthBudget.updateIncome(1, 1000, "Work", 5, 3000, "Work");
+        assertEquals(2, monthBudget.getAllIncome().size());
+        assertEquals(3000, monthBudget.getAllIncome().get(0).getOriginalAmount());
+        assertEquals(5, monthBudget.getAllIncome().get(0).getDay());
+        assertEquals("Work", monthBudget.getAllIncome().get(0).getSource());
+    }
     
+    @Test
+    void testUpdateExpense() {
+        monthBudget.addExpense(rent);
+        monthBudget.addExpense(netflixSubscription);
+
+        rent = new Expense(2500, 1, "Rent", "Need");
+        monthBudget.updateExpense(1, 2500, "Rent", 30, 3000, "Rent");
+
+        // monthBudget.updateExpense(20, 10, "Entertainment", 3, 17, "for fun");
+        assertEquals(2, monthBudget.getAllExpenses().size());
+        assertEquals(3000, monthBudget.getAllExpenses().get(0).getAmount());
+        assertEquals(30, monthBudget.getAllExpenses().get(0).getDay());
+        assertEquals("Rent", monthBudget.getAllExpenses().get(0).getCategory());
+    }
+
 }
 

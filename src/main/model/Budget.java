@@ -36,7 +36,7 @@ public class Budget {
 
     // EFFECTS: returns the total income aount including the incomes from scenario mode
     public int getTotalIncomeWithScenario() {
-        return currentMonthBudget.getNetIncome() + scenarioAddOns.getNetIncome();
+        return currentMonthBudget.getTotalIncome() + scenarioAddOns.getTotalIncome();
     }
 
     // MODIFIES: this

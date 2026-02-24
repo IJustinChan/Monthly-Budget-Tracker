@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class TestMonthlyBudget {
+public class MonthlyBudgetTest {
     private MonthlyBudget monthBudget;
     private Income job;
     private Income scholarship;

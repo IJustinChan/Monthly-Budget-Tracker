@@ -8,6 +8,9 @@ import java.util.ArrayList;
 
 import java.util.Scanner;
 
+import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
+
+@ExcludeFromJacocoGeneratedReport
 // Monthly budget application
 public class BudgetApp {
     private Scanner input;

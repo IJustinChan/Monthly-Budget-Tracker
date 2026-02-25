@@ -11,6 +11,7 @@ This budget app will allow users to add multiple incomes and expenses along with
 * As a user, I want to be able to test different "what-if" scenarios by adding additional income and expenses. These new financial information should not appear in my actual budget.
 * As a user, I want to be able to calculate total income and expense for the month. I also want to be able to see the net income for the month.
 * As a user, I want to be able to delete or update a income or expense from my budget.
-
+* As a user, when I select the Exit button to stop the application, I want to get a reminder to save my budget to a file, and I can have the option to save or not.
+* As a user, when I begin the application, I want to have the option to load my budget from a file or not
 
 

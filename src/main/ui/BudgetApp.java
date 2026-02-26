@@ -18,6 +18,10 @@ public class BudgetApp {
     private String currentMenu = "Main menu";
     private boolean keepGoing = true;
 
+    // Some code for this class was inspired by the TellerApp project from the project's description on edX
+    // Specific parts include runBudget, init(), and handling user input
+    // https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
+
     // EFFECTS: runs the budget app
     public BudgetApp() {
         budget = new Budget();
@@ -32,7 +36,6 @@ public class BudgetApp {
         init();
 
         while (keepGoing) {
-            // command = input.next();
 
             if (currentMenu.equals("Main menu")) {
                 displayMainMenu();

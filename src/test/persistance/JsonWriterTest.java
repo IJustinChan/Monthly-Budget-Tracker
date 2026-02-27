@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 // code for this class is referenced from JsonSerializationDemo code from edX
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
-public class JsonWriterTest {
+@ExcludeFromJacocoGeneratedReport
+public class JsonWriterTest extends JsonTest {
     
 }

@@ -16,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 // code for this class is referenced from JsonSerializationDemo code from edX
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
+@ExcludeFromJacocoGeneratedReport
 public class JsonTest {
     protected void checkMonthlyBudget(int month, int year, ArrayList<Income> allIncome, ArrayList<Expense> allExpenses,
                    MonthlyBudget monthlyBudget) {

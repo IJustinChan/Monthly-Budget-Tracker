@@ -20,7 +20,7 @@ import model.Income;
 public class JsonReader {
     
     // creates a reader to read information from a file
-    public JsonReader() {
+    public JsonReader(String path) {
 
     }
 

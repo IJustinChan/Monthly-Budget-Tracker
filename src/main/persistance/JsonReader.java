@@ -9,6 +9,9 @@ import java.util.stream.Stream;
 import org.json.*;
 
 import model.Budget;
+import model.MonthlyBudget;
+import model.Expense;
+import model.Income;
 
 // code for this class is referenced from JsonSerializationDemo code from edX
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git

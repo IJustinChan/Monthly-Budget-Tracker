@@ -10,8 +10,13 @@
                     "amount": 100,
                     "source": "work",
                     "tax": 0.1,
-                    "amountAfterTax": 90,
                     "day": 3
+                },
+                {
+                    "amount": 1000,
+                    "source": "scholarship",
+                    "tax": 0,
+                    "day": 20
                 }
             ],
             "allExpenses": [
@@ -31,12 +36,18 @@
             "year": 2026,
             "allIncome": [
                 {
-
+                    "amount": 2500,
+                    "source": "scholarship",
+                    "tax": 0,
+                    "day": 27
                 }
             ],
             "allExpenses": [
                 {
-
+                    "amount": 1400,
+                    "day": 1,
+                    "category": "rent",
+                    "necessityType": "need"
                 }
             ]
         }

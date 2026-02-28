@@ -18,12 +18,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExcludeFromJacocoGeneratedReport
 public class JsonTest {
-    protected void checkMonthlyBudget(int month, int year, ArrayList<Income> allIncome, ArrayList<Expense> allExpenses,
+    protected void checkMonthlyBudget(int month, int year, int allIncomeSize, int allExpensesSize,
                    MonthlyBudget monthlyBudget) {
         assertEquals(month, monthlyBudget.getMonth());
         assertEquals(year, monthlyBudget.getYear());
-        assertEquals(allIncome.size(), monthlyBudget.getAllIncome().size());
-        assertEquals(allExpenses.size(), monthlyBudget.getAllExpenses().size());
+        assertEquals(allIncomeSize, monthlyBudget.getAllIncome().size());
+        assertEquals(allExpensesSize, monthlyBudget.getAllExpenses().size());
     }
 
     protected void checkExpense(int amount, int day, String category, String necessityType, Expense expense) {

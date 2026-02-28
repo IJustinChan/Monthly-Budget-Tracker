@@ -10,7 +10,6 @@
                     "amount": 100,
                     "source": "work",
                     "tax": 0.1,
-                    "amountAfterTax": 90,
                     "day": 3
                 }
             ],
@@ -29,16 +28,8 @@
         {
             "month": 1,
             "year": 2026,
-            "allIncome": [
-                {
-
-                }
-            ],
-            "allExpenses": [
-                {
-
-                }
-            ]
+            "allIncome": [],
+            "allExpenses": []
         }
     ]
 }

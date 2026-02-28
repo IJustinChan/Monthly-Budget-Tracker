@@ -4,15 +4,14 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.stream.Stream;
 
 import org.json.*;
 
 import model.Budget;
-import model.MonthlyBudget;
 import model.Expense;
 import model.Income;
+import model.MonthlyBudget;
 
 // code for this class is referenced from JsonSerializationDemo code from edX
 // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
@@ -67,61 +66,61 @@ public class JsonReader {
         JSONArray allIncome = currentMonthBudget.getJSONArray("allIncome");
         JSONArray allExpenses = currentMonthBudget.getJSONArray("allExpenses");
 
-        addAllIncome(allIncome, budget);
-        addAllExpenses(allExpenses, budget);
+        addAllIncome(allIncome, budget.getCurrentMonthBudget());
+        addAllExpenses(allExpenses, budget.getCurrentMonthBudget());
         
     }
 
     // MODIFIES: budget
     // EFFECTS: creates the scenario mode to have additional incomes and expenses
     public void handleCreateScenarioMode(Budget budget, JSONObject jsonObject) {
-        JSONArray currentBudgetArray = jsonObject.getJSONArray("scenarioAddOns");
-        JSONObject currentMonthBudget = currentBudgetArray.getJSONObject(0);
-        JSONArray allIncome = currentMonthBudget.getJSONArray("allIncome");
-        JSONArray allExpenses = currentMonthBudget.getJSONArray("allExpenses");
+        JSONArray scenarioAddOnsArray = jsonObject.getJSONArray("scenarioAddOns");
+        JSONObject scenarioAddOns = scenarioAddOnsArray.getJSONObject(0);
+        JSONArray allIncome = scenarioAddOns.getJSONArray("allIncome");
+        JSONArray allExpenses = scenarioAddOns.getJSONArray("allExpenses");
 
-        addAllIncome(allIncome, budget);
-        addAllExpenses(allExpenses, budget);
+        addAllIncome(allIncome, budget.getScenarioAddOns());
+        addAllExpenses(allExpenses, budget.getScenarioAddOns());
     }
 
     // MODIFIES: budget
     // EFFECTS: parses all the incomes and adds them to the budget
-    private void addAllIncome(JSONArray allIncome, Budget budget) {
+    private void addAllIncome(JSONArray allIncome, MonthlyBudget monthlyBudget) {
         for (Object json : allIncome) {
             JSONObject nextIncome = (JSONObject) json;
-            addIncome(budget, nextIncome);
+            addIncome(monthlyBudget, nextIncome);
         }
     }
 
     // MODIFIES: budget
     // EFFECTS: parses all the expenses and adds them to the budget
-    private void addAllExpenses(JSONArray allExpenses, Budget budget) {
+    private void addAllExpenses(JSONArray allExpenses, MonthlyBudget monthlyBudget) {
         for (Object json : allExpenses) {
             JSONObject nextExpense = (JSONObject) json;
-            addExpense(budget, nextExpense);
+            addExpense(monthlyBudget, nextExpense);
         }
     }
 
     // MODIFIES: budget
     // EFFECTS: parses Income from JSON object and adds it to the budget
-    private void addIncome(Budget budget, JSONObject jsonObject) {
+    private void addIncome(MonthlyBudget monthlyBudget, JSONObject jsonObject) {
         int amount = jsonObject.getInt("amount");
         String source = jsonObject.getString("source");
         double tax = jsonObject.getDouble("tax");
         int day = jsonObject.getInt("day");
         Income income = new Income(amount, day, source, tax);
-        budget.getCurrentMonthBudget().addIncome(income);
+        monthlyBudget.addIncome(income);
     }
 
     // MODIFIES: budget
     // EFFECTS: parses Expense from JSON object and adds it to the budget
-    private void addExpense(Budget budget, JSONObject jsonObject) {
+    private void addExpense(MonthlyBudget monthlyBudget, JSONObject jsonObject) {
         int amount = jsonObject.getInt("amount");
         int day = jsonObject.getInt("day");
         String category = jsonObject.getString("category");
         String necessityType = jsonObject.getString("necessityType");
         Expense expense = new Expense(amount, day, category, necessityType);
-        budget.getCurrentMonthBudget().addExpense(expense);
+        monthlyBudget.addExpense(expense);
     }
 
 }

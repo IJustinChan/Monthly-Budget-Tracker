@@ -1,0 +1,44 @@
+{
+    "month": 1,
+    "year": 2026,
+    "currentMonthBudget": [
+        {
+            "month": 1,
+            "year": 2026,
+            "allIncome": [
+                {   
+                    "amount": 100,
+                    "source": "work",
+                    "tax": 0.1,
+                    "amountAfterTax": 90,
+                    "day": 3
+                }
+            ],
+            "allExpenses": [
+                {
+                    "amount": 50,
+                    "day": 25,
+                    "category": "food",
+                    "necessityType": "need"
+                }
+            ]
+        }
+    ],
+    "isInScenarioMode": false,
+    "scenarioAddOns": [
+        {
+            "month": 1,
+            "year": 2026,
+            "allIncome": [
+                {
+
+                }
+            ],
+            "allExpenses": [
+                {
+
+                }
+            ]
+        }
+    ]
+}

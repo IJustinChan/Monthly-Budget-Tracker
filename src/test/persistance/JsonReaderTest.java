@@ -45,10 +45,12 @@ public class JsonReaderTest extends JsonTest {
     }
 
     @Test
-    void testReaderGeneralWorkRoom() {
+    void testReaderGeneralBudget() {
         JsonReader reader = new JsonReader("./data/testReaderGeneralBudget.json");
         try {
             Budget wr = reader.read();
+            assertEquals(1, wr.getMonth());
+            assertEquals(2026, wr.getYear());
             //
         } catch (IOException e) {
             fail("Couldn't read from file");

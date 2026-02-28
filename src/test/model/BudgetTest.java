@@ -15,7 +15,6 @@ public class BudgetTest {
     private Income scholarship2;
     private Expense rent;
     private Expense netflixSubscription;
-    private Expense randomSubscription;
     private Expense bigExpense;
 
     @BeforeEach
@@ -28,7 +27,6 @@ public class BudgetTest {
 
         rent = new Expense(2500, 1, "Rent", "Need");
         netflixSubscription = new Expense(10, 20, "Entertainment", "Want");
-        randomSubscription = new Expense(15, 16, "Entertainment", "Want");
         bigExpense = new Expense(10000, 1, "Transportation", "Need");
 
         budget.setup(1, 2026);

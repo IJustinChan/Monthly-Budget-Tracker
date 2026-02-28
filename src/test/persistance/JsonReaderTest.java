@@ -4,13 +4,9 @@ import org.junit.jupiter.api.Test;
 
 import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 import model.Budget;
-import model.Income;
 import model.MonthlyBudget;
-import model.Expense;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,7 +20,7 @@ public class JsonReaderTest extends JsonTest {
     void testReaderNonExistentFile() {
         JsonReader reader = new JsonReader("./data/fileDoesNotExistAnywhere.json");
         try {
-            Budget wr = reader.read();
+            Budget budget = reader.read();
             fail("IOException expected");
         } catch (IOException e) {
             // pass
@@ -40,6 +36,7 @@ public class JsonReaderTest extends JsonTest {
             assertEquals(2026, wr.getYear());
             assertFalse(wr.getIsInScenarioMode());
             checkMonthlyBudget(1, 2026, 0, 0, wr.getCurrentMonthBudget());
+            checkMonthlyBudget(1, 2026, 0, 0, wr.getScenarioAddOns());
         } catch (IOException e) {
             fail("Couldn't read from file");
         }

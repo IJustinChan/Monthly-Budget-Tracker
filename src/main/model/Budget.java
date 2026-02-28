@@ -2,6 +2,8 @@ package model;
 
 import java.util.ArrayList;
 
+import org.json.JSONObject;
+
 // Represents a person's budget for a certain month along with scenario mode
 // scenario mode lets users add new incomes or expenses to experiment what will happen
 // to their current monthly budget. These changes do not affect their actual monthly budget
@@ -13,10 +15,14 @@ public class Budget {
     private boolean isInScenarioMode;
     private MonthlyBudget scenarioAddOns;
 
+    // EFFECTS: creates a Budget constructor with isInScenarioMode set to false
     public Budget() {
         isInScenarioMode = false;
     }
 
+    // REQUIRES: 1 <= month <= 12 AND year > 0
+    // MODIFIES: this
+    // EFFECTS: set the budget's month and year to given budget and creates the monthly budget and scenario mode
     public void setup(int month, int year) {
         this.month = month;
         this.year = year;
@@ -101,6 +107,11 @@ public class Budget {
 
     public int getYear() {
         return year;
+    }
+
+    public JSONObject toJson() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'toJson'");
     }
     
 

@@ -7,6 +7,7 @@ public class Income extends Transaction {
     private double tax;
     private int amountAfterTax;
     
+    // EFFECTS: creates a constructor for income by setting up the amount, day, source, tax, and amountAfterTax
     public Income(int amount, int day, String source, double tax) {
         super(amount, day);
         this.source = source;
@@ -41,6 +42,9 @@ public class Income extends Transaction {
         return getOriginalAmount() - taxAmount;
     }
 
+    // REQUIRES: newAmount > 0
+    // MODIFIES: this
+    // EFfECTS: sets the current amount to the new amount. Updates the amountAfterTax as well
     public void setAmount(int newAmount) {
         amount = newAmount;
         amountAfterTax = incomeAfterTax(tax);

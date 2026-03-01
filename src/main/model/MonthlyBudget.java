@@ -2,9 +2,14 @@ package model;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import persistance.Writable;
+
 // MonthlyBudget represents information about how a user's monthly budget appears, such as storing
 // all the expenses and incomes in a given month
-public class MonthlyBudget {
+public class MonthlyBudget implements Writable {
     private int month;
     private int year;
     private ArrayList<Income> allIncome;
@@ -138,6 +143,38 @@ public class MonthlyBudget {
 
     public ArrayList<Expense> getAllExpenses() {
         return allExpenses;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("month", month);
+        json.put("year", year);
+        json.put("allIncome", incomeToJson());
+        json.put("allExpenses", expenseToJson());
+        return json;
+    }
+
+    // EFFECTS: returns all income in the MonthlyBudget as a JSON Array
+    private JSONArray incomeToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Income income : allIncome) {
+            jsonArray.put(income.toJson());
+        }
+
+        return jsonArray;
+    }
+
+    // EFFECTS: returns all expense in the MonthlyBudget as a JSON Array
+    private JSONArray expenseToJson() {
+        JSONArray jsonArray = new JSONArray();
+
+        for (Expense expense : allExpenses) {
+            jsonArray.put(expense.toJson());
+        }
+
+        return jsonArray;
     }
 
 }

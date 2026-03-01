@@ -2,13 +2,16 @@ package model;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import persistance.Writable;
 
 // Represents a person's budget for a certain month along with scenario mode
 // scenario mode lets users add new incomes or expenses to experiment what will happen
 // to their current monthly budget. These changes do not affect their actual monthly budget
 // The main purpose of this class is to integrate scenario mode add ons with the actual month budget
-public class Budget {
+public class Budget implements Writable {
     private int month;
     private int year;
     private MonthlyBudget currentMonthBudget;
@@ -110,8 +113,20 @@ public class Budget {
     }
 
     public JSONObject toJson() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toJson'");
+        JSONObject json = new JSONObject();
+        json.put("month", month);
+        json.put("year", year);
+        json.put("isInScenarioMode", isInScenarioMode);
+        json.put("currentMonthBudget", monthlyBudgetToJson(currentMonthBudget));
+        json.put("scenarioAddOns", monthlyBudgetToJson(scenarioAddOns));
+        return json;
+    }
+
+    // EFFECTS: returns the given MonthlyBudget as a JSON Array
+    private JSONArray monthlyBudgetToJson(MonthlyBudget monthlyBudget) {
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.put(monthlyBudget.toJson());
+        return jsonArray;
     }
     
 

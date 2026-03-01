@@ -1,21 +1,17 @@
 {
+    "currentMonthBudget": [{
+        "month": 1,
+        "year": 2026,
+        "allIncome": [],
+        "allExpenses": []
+    }],
+    "isInScenarioMode": false,
     "month": 1,
     "year": 2026,
-    "currentMonthBudget": [
-        {
-            "month": 1,
-            "year": 2026,
-            "allIncome": [],
-            "allExpenses": []
-        }
-    ],
-    "isInScenarioMode": false,
-    "scenarioAddOns": [
-        {
-            "month": 1,
-            "year": 2026,
-            "allIncome": [],
-            "allExpenses": []
-        }
-    ]
+    "scenarioAddOns": [{
+        "month": 1,
+        "year": 2026,
+        "allIncome": [],
+        "allExpenses": []
+    }]
 }

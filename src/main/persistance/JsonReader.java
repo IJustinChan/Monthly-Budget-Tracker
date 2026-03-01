@@ -28,8 +28,8 @@ public class JsonReader {
     // EFFECTS: Reads budget from file and returns it
     // throws IOException if an error occurs reading data from file
     public Budget read() throws IOException {
-        String JsonData = readFile(source);
-        JSONObject jsonObject = new JSONObject(JsonData);
+        String jsonData = readFile(source);
+        JSONObject jsonObject = new JSONObject(jsonData);
         return parseBudget(jsonObject);
     }
 

@@ -18,6 +18,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @ExcludeFromJacocoGeneratedReport
 public class JsonWriterTest extends JsonTest {
+
+    void setupBudget(Budget budget) {
+        budget.setup(1, 2026);
+        budget.getCurrentMonthBudget().addIncome(new Income(100, 3, "work", 0.1));
+        budget.getCurrentMonthBudget().addIncome(new Income(1000, 20, "scholarship", 0));
+        budget.getCurrentMonthBudget().addExpense(new Expense(50, 25, "food", "need"));
+        budget.getScenarioAddOns().addIncome(new Income(2500, 27, "scholarship", 0));
+        budget.getScenarioAddOns().addExpense(new Expense(1400, 1, "rent", "need"));
+    }
     
     @Test
     void testWriterInvalidFile() {
@@ -56,19 +65,11 @@ public class JsonWriterTest extends JsonTest {
     void testWriterGeneralWorkroom() {
         try {
             Budget budget = new Budget();
-            budget.setup(2, 2026);
-            budget.getCurrentMonthBudget().addIncome(new Income(100, 3, "work", 0.1));
-            budget.getCurrentMonthBudget().addIncome(new Income(1000, 20, "scholarship", 0));
-            budget.getCurrentMonthBudget().addExpense(new Expense(50, 25, "food", "need"));
-
-            budget.getScenarioAddOns().addIncome(new Income(2500, 27, "scholarship", 0));
-            budget.getScenarioAddOns().addExpense(new Expense(1400, 1, "rent", "need"));
-
+            setupBudget(budget);
             JsonWriter writer = new JsonWriter("./data/testWriterGeneralBudget.json");
             writer.open();
             writer.write(budget);
             writer.close();
-
             JsonReader reader = new JsonReader("./data/testWriterGeneralBudget.json");
             budget = reader.read();
             assertEquals(1, budget.getMonth());
@@ -82,7 +83,6 @@ public class JsonWriterTest extends JsonTest {
             checkMonthlyBudget(1, 2026, 1, 1, scenarioAddOns);
             checkIncome(2500, 27, "scholarship", 0, scenarioAddOns.getAllIncome().get(0));
             checkExpense(1400, 1, "rent", "need", scenarioAddOns.getAllExpenses().get(0));
-
         } catch (IOException e) {
             fail("Exception should not have been thrown");
         }

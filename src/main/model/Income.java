@@ -1,8 +1,12 @@
 package model;
 
+import org.json.JSONObject;
+
+import persistance.Writable;
+
 // Income class represents information about a person's income such as amount before and after tax, 
 // tax rate, and the source of that income
-public class Income extends Transaction {
+public class Income extends Transaction implements Writable {
     private String source;
     private double tax;
     private int amountAfterTax;
@@ -64,6 +68,16 @@ public class Income extends Transaction {
 
     public int getOriginalAmount() {
         return amount;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("amount", amount);
+        json.put("source", source);
+        json.put("tax", tax);
+        json.put("day", day);
+        return json;
     }
 
 

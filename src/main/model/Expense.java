@@ -1,8 +1,12 @@
 package model;
 
+import org.json.JSONObject;
+
+import persistance.Writable;
+
 // Expense class that stores information about a person's expense such as amount, date, category, 
 // and whether its a need or want
-public class Expense extends Transaction {
+public class Expense extends Transaction implements Writable {
     private String category;
     private String necessityType;
     
@@ -34,6 +38,16 @@ public class Expense extends Transaction {
 
     public String getNecessityType() {
         return necessityType;
+    }
+
+    @Override
+    public JSONObject toJson() {
+        JSONObject json = new JSONObject();
+        json.put("amount", amount);
+        json.put("day", day);
+        json.put("category", category);
+        json.put("necessityType", necessityType);
+        return json;
     }
 
 }

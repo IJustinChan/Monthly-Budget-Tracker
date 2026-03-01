@@ -1,0 +1,45 @@
+{
+    "currentMonthBudget": [{
+        "month": 1,
+        "year": 2026,
+        "allIncome": [
+            {
+                "amount": 100,
+                "tax": 0.1,
+                "source": "work",
+                "day": 3
+            },
+            {
+                "amount": 1000,
+                "tax": 0,
+                "source": "scholarship",
+                "day": 20
+            }
+        ],
+        "allExpenses": [{
+            "amount": 50,
+            "necessityType": "need",
+            "category": "food",
+            "day": 25
+        }]
+    }],
+    "isInScenarioMode": false,
+    "month": 1,
+    "year": 2026,
+    "scenarioAddOns": [{
+        "month": 1,
+        "year": 2026,
+        "allIncome": [{
+            "amount": 2500,
+            "tax": 0,
+            "source": "scholarship",
+            "day": 27
+        }],
+        "allExpenses": [{
+            "amount": 1400,
+            "necessityType": "need",
+            "category": "rent",
+            "day": 1
+        }]
+    }]
+}

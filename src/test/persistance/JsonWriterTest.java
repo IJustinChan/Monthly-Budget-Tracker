@@ -9,7 +9,6 @@ import model.Income;
 import model.MonthlyBudget;
 
 import java.io.IOException;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 

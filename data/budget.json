@@ -1,35 +1,27 @@
 {
-    "month": 1,
-    "year": 2026,
-    "currentMonthBudget": [
-        {
-            "month": 1,
-            "year": 2026,
-            "allIncome": [
-                {   
-                    "amount": 100,
-                    "source": "work",
-                    "tax": 0.1,
-                    "day": 3
-                }
-            ],
-            "allExpenses": [
-                {
-                    "amount": 50,
-                    "day": 25,
-                    "category": "food",
-                    "necessityType": "need"
-                }
-            ]
-        }
-    ],
+    "currentMonthBudget": [{
+        "month": 2,
+        "year": 2026,
+        "allIncome": [{
+            "amount": 100,
+            "tax": 0.1,
+            "source": "work",
+            "day": 10
+        }],
+        "allExpenses": []
+    }],
     "isInScenarioMode": false,
-    "scenarioAddOns": [
-        {
-            "month": 1,
-            "year": 2026,
-            "allIncome": [],
-            "allExpenses": []
-        }
-    ]
+    "month": 2,
+    "year": 2026,
+    "scenarioAddOns": [{
+        "month": 2,
+        "year": 2026,
+        "allIncome": [],
+        "allExpenses": [{
+            "amount": 1500,
+            "necessityType": "need",
+            "category": "rent",
+            "day": 13
+        }]
+    }]
 }

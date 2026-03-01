@@ -3,7 +3,11 @@ package ui;
 import model.Budget;
 import model.Expense;
 import model.Income;
+import persistance.JsonReader;
+import persistance.JsonWriter;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import java.util.Scanner;
@@ -17,14 +21,23 @@ public class BudgetApp {
     private Budget budget;
     private String currentMenu = "Main menu";
     private boolean keepGoing = true;
+    private boolean startProgram = true;
+    private static final String JSON_STORE = "./data/budget.json";
+    private JsonWriter jsonWriter;
+    private JsonReader jsonReader;
 
     // Some code for this class was inspired by the TellerApp project from the project's description on edX
     // Specific parts include runBudget, init(), and handling user input
     // https://github.students.cs.ubc.ca/CPSC210/TellerApp.git
 
+    // some code for this class is also referenced from JsonSerializationDemo code from edX
+    // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
+
     // EFFECTS: runs the budget app
-    public BudgetApp() {
+    public BudgetApp() throws FileNotFoundException{
         budget = new Budget();
+        jsonWriter = new JsonWriter(JSON_STORE);
+        jsonReader = new JsonReader(JSON_STORE);
         runBudget();
     }
 
@@ -33,7 +46,19 @@ public class BudgetApp {
     private void runBudget() {
         int command;
 
-        init();
+        input = new Scanner(System.in);
+
+        if (startProgram == true) {
+            System.out.println("Type 1 to load a existing budget or type 2 to create a new budget");
+            int choice = input.nextInt();
+            if (choice == 1) {
+                loadbudget();
+            } else {
+                init();
+            }
+        }
+
+        // init();
 
         while (keepGoing) {
 
@@ -63,8 +88,6 @@ public class BudgetApp {
     // MODIFIES: this
     // EFFECTS: initalizes the budget app object
     private void init() {
-        input = new Scanner(System.in);
-
         System.out.println("Please enter the month (1-12) this budget is for: ");
         int month = input.nextInt();
 
@@ -75,7 +98,7 @@ public class BudgetApp {
 
     }
 
-    // REQUIRES: 1 <= command <= 4
+    // REQUIRES: 1 <= command <= 5
     // MODIFIES: this
     // EFFECTS: handles the user input for when the user is on the main menu
     private void processMainMenu(int command) {
@@ -85,6 +108,8 @@ public class BudgetApp {
             currentMenu = "Scenario mode";
         } else if (command == 3) {
             displayMonthlyBudgetSummary();
+        } else if (command == 4) { 
+            saveBudget();
         } else {
             keepGoing = false;
         }
@@ -154,7 +179,8 @@ public class BudgetApp {
         System.out.println("1. Edit the monthly budget");
         System.out.println("2. Go into scenario mode");
         System.out.println("3. See monthly budget summary");
-        System.out.println("4. Exit application");
+        System.out.println("4. Save budget to a file");
+        System.out.println("5. Exit application without saving budget");
     }
 
     // EFFECTS: displays options for the user when the user is editing the monthly budget
@@ -412,6 +438,50 @@ public class BudgetApp {
         String newCategory = input.next();
 
         budget.getScenarioAddOns().updateExpense(oldDay, oldAmount, oldCategory, newDay, newAmount, newCategory);
+    }
+
+    // REQUIRES: 1 <= month <= 12
+    // EFFECTS: returns the name of the month
+    private String getMonthName(int month) {
+        ArrayList<String> months = new ArrayList<>();
+        months.add("January");
+        months.add("February");
+        months.add("March");
+        months.add("April");
+        months.add("May");
+        months.add("June");
+        months.add("July");
+        months.add("August");
+        months.add("September");
+        months.add("October");
+        months.add("November");
+        months.add("December");
+        return months.get(month - 1);
+    }
+
+    // EFFECTS: saves the budget to file
+    private void saveBudget() {
+        try {
+            jsonWriter.open();
+            jsonWriter.write(budget);
+            jsonWriter.close();
+            System.out.println("Saved budget for " + getMonthName(budget.getMonth()) + " " 
+                    + budget.getYear() + " to " + JSON_STORE);
+        } catch (FileNotFoundException e) {
+            System.out.println("Unable to write to file: " + JSON_STORE);
+        }
+    }
+
+    // MODIFIES: this
+    // EFFECTS: loads budget from file
+    private void loadbudget() {
+        try {
+            budget = jsonReader.read();
+            System.out.println("Loaded budget for " + getMonthName(budget.getMonth()) 
+                    + " " + budget.getYear() + " from " + JSON_STORE);
+        } catch (IOException e) {
+            System.out.println("Unable to read from file: " + JSON_STORE);
+        }
     }
 
 }

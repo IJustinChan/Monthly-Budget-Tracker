@@ -21,7 +21,6 @@ public class BudgetApp {
     private Budget budget;
     private String currentMenu = "Main menu";
     private boolean keepGoing = true;
-    private boolean startProgram = true;
     private static final String JSON_STORE = "./data/budget.json";
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
@@ -47,18 +46,14 @@ public class BudgetApp {
         int command;
 
         input = new Scanner(System.in);
-
-        if (startProgram == true) {
-            System.out.println("Type 1 to load a existing budget or type 2 to create a new budget");
-            int choice = input.nextInt();
-            if (choice == 1) {
-                loadbudget();
-            } else {
-                init();
-            }
+        
+        System.out.println("Type 1 to load a existing budget or type 2 to create a new budget");
+        int choice = input.nextInt();
+        if (choice == 1) {
+            loadbudget();
+        } else {
+            init();
         }
-
-        // init();
 
         while (keepGoing) {
 
@@ -95,7 +90,6 @@ public class BudgetApp {
         int year = input.nextInt();
 
         budget.setup(month, year);
-
     }
 
     // REQUIRES: 1 <= command <= 5
@@ -180,7 +174,7 @@ public class BudgetApp {
         System.out.println("2. Go into scenario mode");
         System.out.println("3. See monthly budget summary");
         System.out.println("4. Save budget to a file");
-        System.out.println("5. Exit application without saving budget");
+        System.out.println("5. Exit application without saving budget changes");
     }
 
     // EFFECTS: displays options for the user when the user is editing the monthly budget
@@ -483,5 +477,5 @@ public class BudgetApp {
             System.out.println("Unable to read from file: " + JSON_STORE);
         }
     }
-
+    
 }

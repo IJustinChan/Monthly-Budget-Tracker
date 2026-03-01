@@ -1,27 +1,17 @@
 {
     "currentMonthBudget": [{
-        "month": 2,
-        "year": 2026,
-        "allIncome": [{
-            "amount": 100,
-            "tax": 0.1,
-            "source": "work",
-            "day": 10
-        }],
+        "month": 8,
+        "year": 2025,
+        "allIncome": [],
         "allExpenses": []
     }],
     "isInScenarioMode": false,
-    "month": 2,
-    "year": 2026,
+    "month": 8,
+    "year": 2025,
     "scenarioAddOns": [{
-        "month": 2,
-        "year": 2026,
+        "month": 8,
+        "year": 2025,
         "allIncome": [],
-        "allExpenses": [{
-            "amount": 1500,
-            "necessityType": "need",
-            "category": "rent",
-            "day": 13
-        }]
+        "allExpenses": []
     }]
 }

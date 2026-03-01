@@ -95,17 +95,14 @@ public class MonthlyBudget implements Writable {
     // EFFECTS: updates a income from all incomes that matches the day, amount and source with its new information
     //          If no income matches given requirements, nothing is updated
     public void updateIncome(int oldDay, int oldAmount, String oldSource, int newDay, int newAmount, String newSource) {
-        int index = 0;
         for (Income income : allIncome) {
             if (income.getDay() == oldDay && income.getOriginalAmount() == oldAmount 
                        && income.getSource().equals(oldSource)) {
-                Income incomeToUpdate = allIncome.get(index);
-                incomeToUpdate.setAmount(newAmount);
-                incomeToUpdate.setDay(newDay);
-                incomeToUpdate.setSource(newSource);
+                income.setAmount(newAmount);
+                income.setDay(newDay);
+                income.setSource(newSource);
                 break;
             }
-            index++;
         }
     }
 
@@ -115,17 +112,14 @@ public class MonthlyBudget implements Writable {
     //          If no expense matches given requirements, nothing is updated
     public void updateExpense(int oldDay, int oldAmount, String oldCategory, int newDay, 
               int newAmount, String newCategory) {
-        int index = 0;
         for (Expense expense : allExpenses) {
             if (expense.getDay() == oldDay && expense.getAmount() == oldAmount 
                         && expense.getCategory().equals(oldCategory)) {
-                Expense expenseToUpdate = allExpenses.get(index);
-                expenseToUpdate.setAmount(newAmount);
-                expenseToUpdate.setDay(newDay);
-                expenseToUpdate.setCategory(newCategory);
+                expense.setAmount(newAmount);
+                expense.setDay(newDay);
+                expense.setCategory(newCategory);
                 break;
             }
-            index++;
         }
     }
 

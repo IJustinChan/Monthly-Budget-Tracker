@@ -1,16 +1,16 @@
 {
     "currentMonthBudget": [{
-        "month": 8,
-        "year": 2025,
+        "month": 1,
+        "year": 2026,
         "allIncome": [],
         "allExpenses": []
     }],
     "isInScenarioMode": false,
-    "month": 8,
-    "year": 2025,
+    "month": 1,
+    "year": 2026,
     "scenarioAddOns": [{
-        "month": 8,
-        "year": 2025,
+        "month": 1,
+        "year": 2026,
         "allIncome": [],
         "allExpenses": []
     }]

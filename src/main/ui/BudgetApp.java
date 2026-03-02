@@ -475,7 +475,8 @@ public class BudgetApp {
                     + " " + budget.getYear() + " from " + JSON_STORE);
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
+            keepGoing = false;
         }
     }
-    
+
 }

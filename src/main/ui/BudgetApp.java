@@ -33,7 +33,7 @@ public class BudgetApp {
     // https://github.students.cs.ubc.ca/CPSC210/JsonSerializationDemo.git
 
     // EFFECTS: runs the budget app
-    public BudgetApp() throws FileNotFoundException{
+    public BudgetApp() throws FileNotFoundException {
         budget = new Budget();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
@@ -46,14 +46,8 @@ public class BudgetApp {
         int command;
 
         input = new Scanner(System.in);
-        
-        System.out.println("Type 1 to load a existing budget or type 2 to create a new budget");
-        int choice = input.nextInt();
-        if (choice == 1) {
-            loadbudget();
-        } else {
-            init();
-        }
+
+        handleIntro();
 
         while (keepGoing) {
 
@@ -467,8 +461,8 @@ public class BudgetApp {
     }
 
     // MODIFIES: this
-    // EFFECTS: loads budget from file
-    private void loadbudget() {
+    // EFFECTS: loads budget from file. Stops the application if budget cannot be loaded
+    private void loadBudget() {
         try {
             budget = jsonReader.read();
             System.out.println("Loaded budget for " + getMonthName(budget.getMonth()) 
@@ -476,6 +470,16 @@ public class BudgetApp {
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
             keepGoing = false;
+        }
+    }
+
+    private void handleIntro() {
+        System.out.println("Type 1 to load a existing budget or type 2 to create a new budget");
+        int choice = input.nextInt();
+        if (choice == 1) {
+            loadBudget();
+        } else {
+            init();
         }
     }
 

@@ -473,6 +473,7 @@ public class BudgetApp {
         }
     }
 
+    // EFFECTS: Ask user if they want to load existing budget or not
     private void handleIntro() {
         System.out.println("Type 1 to load a existing budget or type 2 to create a new budget");
         int choice = input.nextInt();

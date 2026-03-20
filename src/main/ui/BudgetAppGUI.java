@@ -11,6 +11,7 @@ import java.awt.Color;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -44,8 +45,6 @@ public class BudgetAppGUI extends JFrame {
         setupApp();
         setTitle("Monthly Budget Tracker: " + getMonthName(budget.getMonth()) + " " + budget.getYear());
 
-        // setLayout(new GridBagLayout());
-
         // change color of background
         // getContentPane().setBackground(new Color(50, 100, 170));
 
@@ -53,40 +52,69 @@ public class BudgetAppGUI extends JFrame {
         JPanel incomePanel = new JPanel(new GridLayout(3, 2, 10, 10));
         JTextField incomeAmountField = new JTextField();
         JTextField incomeSourceField = new JTextField();
-        JTextField incomeTaxField = new JTextField();
         JTextField incomeDayField = new JTextField();
+        JTextField incomeTaxField = new JTextField();
         JButton incomeAddButton = new JButton("Add Income");
         JButton incomeRemoveButton = new JButton("Remove Income");
+        JLabel incomeAmountText = new JLabel();
+        JLabel incomeSourceText = new JLabel();
+        JLabel incomeDayText = new JLabel();
+        JLabel incomeTaxText = new JLabel();
 
+        incomeAmountText.setText("Income Amount: ");
+        incomeSourceText.setText("Income Source: ");
+        incomeDayText.setText("Income Day: ");
+        incomeTaxText.setText("Income Tax (0 if not taxed): ");
+
+        incomePanel.add(incomeAmountText);
         incomePanel.add(incomeAmountField);
+        incomePanel.add(incomeSourceText);
         incomePanel.add(incomeSourceField);
-        incomePanel.add(incomeTaxField);
+        incomePanel.add(incomeDayText);
         incomePanel.add(incomeDayField);
+        incomePanel.add(incomeTaxText);
+        incomePanel.add(incomeTaxField);
         incomePanel.add(incomeAddButton);
         incomePanel.add(incomeRemoveButton);
 
         // --- Handle the expense panel ---
-        // 6, 1
-        JPanel expensePanel = new JPanel(new GridLayout(3, 2, 10, 10));
+        JPanel expensePanel = new JPanel(new GridLayout(3, 4, 10, 10));
         JTextField expenseAmountField = new JTextField();
         JTextField expenseCategoryField = new JTextField();
         JTextField expenseDayField = new JTextField();
         JTextField expenseNecessityField = new JTextField();
         JButton expenseAddButton = new JButton("Add Expense");
         JButton expenseRemoveButton = new JButton("Remove Expense");
+        JLabel expenseAmountText = new JLabel();
+        JLabel expenseCategoryText = new JLabel();
+        JLabel expenseDayText = new JLabel();
+        JLabel expenseNecessityText = new JLabel();
 
+        expenseAmountText.setText("Expense Amount: ");
+        expenseCategoryText.setText("Expense Category: ");
+        expenseDayText.setText("Expense Day: ");
+        expenseNecessityText.setText("Expense Necessity Type: ");
+
+        expensePanel.add(expenseAmountText);
         expensePanel.add(expenseAmountField);
+        expensePanel.add(expenseCategoryText);
         expensePanel.add(expenseCategoryField);
+        expensePanel.add(expenseDayText);
         expensePanel.add(expenseDayField);
+        expensePanel.add(expenseNecessityText);
         expensePanel.add(expenseNecessityField);
         expensePanel.add(expenseAddButton);
         expensePanel.add(expenseRemoveButton);
 
         // --- Action panel ---
-        JPanel actionPanel = new JPanel(new GridLayout(3, 1, 10 ,10));
+        JPanel actionPanel = new JPanel(new GridLayout(3, 4, 10 ,10));
         JButton expenseCategoryButton = new JButton("Expense category piechart");
+        JButton incomeSourceButton = new JButton("Income category piechart");
+        JButton saveBudget = new JButton("Save Budget");
 
         actionPanel.add(expenseCategoryButton);
+        actionPanel.add(incomeSourceButton);
+        actionPanel.add(saveBudget);
 
         String[] incomeColumns = {"Day", "Amount (after tax)", "Source"};
         DefaultTableModel incomeTableModel = new DefaultTableModel(incomeColumns, 0);
@@ -100,12 +128,29 @@ public class BudgetAppGUI extends JFrame {
 
         JScrollPane expenseScrollPane = new JScrollPane(expenseTable);
 
-        incomePanel.setBackground(Color.GREEN);
         add(incomePanel, BorderLayout.NORTH);
         add(expensePanel, BorderLayout.SOUTH);
         add(incomeScrollPane, BorderLayout.WEST);
         add(expenseScrollPane, BorderLayout.EAST);
         add(actionPanel, BorderLayout.CENTER);
+
+        saveBudget.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+                try {
+                    saveBudget();
+                    JOptionPane.showMessageDialog(null,
+                    "Changes to budget has successfully been saved. Feel free to keep making changes.",
+                    "Changes saved",
+                    JOptionPane.PLAIN_MESSAGE);
+                } catch (FileNotFoundException error) {
+                    JOptionPane.showMessageDialog(null,
+                        "Unable to write to file: " + JSON_STORE + ". Budget is unsaved.",
+                    "Error saving budget",
+                    JOptionPane.PLAIN_MESSAGE);
+                }
+				
+            }
+		});
 
         setVisible(true);
 
@@ -116,7 +161,6 @@ public class BudgetAppGUI extends JFrame {
 					  "Type 'Y' to load existing budget otherwise type anything (don't leave blank)",
 					  "Load budget",
 					  JOptionPane.QUESTION_MESSAGE);
-        System.out.println(wantsLoadBudget);
         
         if (wantsLoadBudget == null) {
             System.exit(0);
@@ -159,7 +203,7 @@ public class BudgetAppGUI extends JFrame {
     }
 
     // EFFECTS: saves the budget to file
-    private void saveBudget() {
+    private void saveBudget() throws FileNotFoundException {
         try {
             jsonWriter.open();
             jsonWriter.write(budget);
@@ -168,6 +212,7 @@ public class BudgetAppGUI extends JFrame {
                     + budget.getYear() + " to " + JSON_STORE);
         } catch (FileNotFoundException e) {
             System.out.println("Unable to write to file: " + JSON_STORE);
+            throw new FileNotFoundException();
         }
     }
 

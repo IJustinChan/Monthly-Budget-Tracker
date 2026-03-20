@@ -152,6 +152,46 @@ public class BudgetAppGUI extends JFrame {
             }
 		});
 
+        incomeAddButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int amount = Integer.parseInt(incomeAmountField.getText());
+                String source = incomeSourceField.getText();
+                int day = Integer.parseInt(incomeDayField.getText());
+                double tax = Double.parseDouble(incomeTaxField.getText());
+                Income income = new Income(amount, day, source, tax);
+                budget.getCurrentMonthBudget().addIncome(income);
+            }
+        });
+
+        expenseAddButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int amount = Integer.parseInt(expenseAmountField.getText());
+                String category = expenseCategoryField.getText();
+                int day = Integer.parseInt(expenseDayField.getText());
+                String necessityType = expenseNecessityField.getText();
+                Expense expense = new Expense(amount, day, category, necessityType);
+                budget.getCurrentMonthBudget().addExpense(expense);
+            }
+        });
+
+        incomeRemoveButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int amount = Integer.parseInt(incomeAmountField.getText());
+                String source = incomeSourceField.getText();
+                int day = Integer.parseInt(incomeDayField.getText());
+                budget.getCurrentMonthBudget().removeIncome(day, amount, source);
+            }
+        });
+
+        expenseRemoveButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int amount = Integer.parseInt(expenseAmountField.getText());
+                String category = expenseCategoryField.getText();
+                int day = Integer.parseInt(expenseDayField.getText());
+                budget.getCurrentMonthBudget().removeExpense(day, amount, category);
+            }
+        });
+
         setVisible(true);
 
     }

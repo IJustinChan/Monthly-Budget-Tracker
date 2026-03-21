@@ -41,7 +41,7 @@ https://www.youtube.com/watch?v=ccUdvsj4L0U&t=812s
 @ExcludeFromJacocoGeneratedReport
 public class BudgetAppGUI extends JFrame {
     private static final int WIDTH = 1200;
-	private static final int HEIGHT = 600;
+    private static final int HEIGHT = 600;
     private static final String JSON_STORE = "./data/budget.json";
     private static final String imagePath = "images/budgetImage.png";
     private JsonWriter jsonWriter;
@@ -108,7 +108,7 @@ public class BudgetAppGUI extends JFrame {
     private void setupApp() {
         String wantsLoadBudget = JOptionPane.showInputDialog(null,
 			"Type \"Y\" (no quotes) to load existing budget otherwise type anything (don't leave blank)", 
-            "Load budget", JOptionPane.QUESTION_MESSAGE);
+                "Load budget", JOptionPane.QUESTION_MESSAGE);
         
         if (wantsLoadBudget == null) {
             System.exit(0);
@@ -116,15 +116,15 @@ public class BudgetAppGUI extends JFrame {
             loadBudget();
         } else {
             String monthText = JOptionPane.showInputDialog(null,
-                "Please enter the month (1-12) this budget is for: ",
-                "Enter month",
-                JOptionPane.QUESTION_MESSAGE);
+                    "Please enter the month (1-12) this budget is for: ",
+                    "Enter month",
+                    JOptionPane.QUESTION_MESSAGE);
             int month = Integer.parseInt(monthText);
 
             String yearText = JOptionPane.showInputDialog(null,
-                "Please enter the year this month is in: ",
-                "Enter year",
-                JOptionPane.QUESTION_MESSAGE);
+                    "Please enter the year this month is in: ",
+                    "Enter year",
+                    JOptionPane.QUESTION_MESSAGE);
             int year = Integer.parseInt(yearText);
             
             budget.setup(month, year);
@@ -230,7 +230,8 @@ public class BudgetAppGUI extends JFrame {
         ArrayList<Income> previousIncomes = budget.getCurrentMonthBudget().getAllIncome();
         if (previousIncomes != null) {
             for (Income income : previousIncomes) {
-                incomeTableModel.addRow(new Object[]{income.getDay(), income.getOriginalAmount(), income.getAmount(), income.getSource()});
+                incomeTableModel.addRow(new Object[]{income.getDay(), income.getOriginalAmount(), 
+                        income.getAmount(), income.getSource()});
             }
         }
     }
@@ -241,7 +242,8 @@ public class BudgetAppGUI extends JFrame {
         ArrayList<Expense> previousExpenses = budget.getCurrentMonthBudget().getAllExpenses();
         if (previousExpenses != null) {
             for (Expense expense: previousExpenses) {
-                expenseTableModel.addRow(new Object[]{expense.getDay(), expense.getAmount(), expense.getCategory(), expense.getNecessityType()});
+                expenseTableModel.addRow(new Object[]{expense.getDay(), expense.getAmount(), 
+                        expense.getCategory(), expense.getNecessityType()});
             }
         }
     }
@@ -251,18 +253,18 @@ public class BudgetAppGUI extends JFrame {
     //          if budget cannot be saved, display a error message
     private void handleSaveBudget() {
         saveBudget.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+            public void actionPerformed(ActionEvent e) {
                 try {
                     saveBudget();
                     JOptionPane.showMessageDialog(null,
-                    "Changes to budget has successfully been saved. Feel free to keep making changes.",
-                    "Changes saved",
-                    JOptionPane.PLAIN_MESSAGE);
+                            "Changes to budget has successfully been saved. Feel free to keep making changes.",
+                            "Changes saved",
+                                JOptionPane.PLAIN_MESSAGE);
                 } catch (FileNotFoundException error) {
                     JOptionPane.showMessageDialog(null,
-                        "Unable to write to file: " + JSON_STORE + ". Budget is unsaved.",
-                    "Error saving budget",
-                    JOptionPane.PLAIN_MESSAGE);
+                                "Unable to write to file: " + JSON_STORE + ". Budget is unsaved.",
+                            "Error saving budget",
+                                JOptionPane.PLAIN_MESSAGE);
                 }
 				
             }
@@ -444,8 +446,8 @@ public class BudgetAppGUI extends JFrame {
     }
 
     // EFFECTS: starts the application
-	public static void main(String[] args) {
-		new BudgetAppGUI();
-	}
+    public static void main(String[] args) {
+        new BudgetAppGUI();
+    }
 
 }

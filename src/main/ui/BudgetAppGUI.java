@@ -29,6 +29,7 @@ public class BudgetAppGUI extends JFrame {
     private Budget budget;
     private DefaultTableModel incomeTableModel;
     private DefaultTableModel expenseTableModel;
+    String imagePath = "images/budgetImage.png";
 
     public BudgetAppGUI() {
         budget = new Budget();
@@ -53,9 +54,6 @@ public class BudgetAppGUI extends JFrame {
 
         setupApp();
         setTitle("Monthly Budget Tracker: " + getMonthName(budget.getMonth()) + " " + budget.getYear());
-
-        // change color of background
-        // getContentPane().setBackground(new Color(50, 100, 170));
 
         // --- Handle the income panel ---
         JPanel incomePanel = new JPanel(new GridLayout(3, 2, 10, 10));
@@ -116,26 +114,13 @@ public class BudgetAppGUI extends JFrame {
         expensePanel.add(expenseRemoveButton);
 
         // --- Action panel ---
-        JPanel actionPanel = new JPanel(new GridLayout(3, 4, 10 ,10));
-        JButton expenseCategoryButton = new JButton("Expense category piechart");
-        JButton incomeSourceButton = new JButton("Income category piechart");
+        JPanel actionPanel = new JPanel(new GridLayout(2, 1, 10 ,10));
+        ImageIcon budgetVisual = new ImageIcon(imagePath);
+        JLabel budgetVisualLabel = new JLabel(budgetVisual);
         JButton saveBudget = new JButton("Save Budget");
 
-        actionPanel.add(expenseCategoryButton);
-        actionPanel.add(incomeSourceButton);
+        actionPanel.add(budgetVisualLabel);
         actionPanel.add(saveBudget);
-
-        // String[] incomeColumns = {"Day", "Amount (after tax)", "Source"};
-        // // incomeTableModel = new DefaultTableModel(incomeColumns, 0);
-        // JTable incomeTable = new JTable(incomeTableModel);
-
-        // JScrollPane incomeScrollPane = new JScrollPane(incomeTable);
-
-        // String[] expenseColumns = {"Day", "Amount", "Category", "Necessity Type"};
-        // expenseTableModel = new DefaultTableModel(expenseColumns, 0);
-        // JTable expenseTable = new JTable(expenseTableModel);
-
-        // JScrollPane expenseScrollPane = new JScrollPane(expenseTable);
 
         add(incomePanel, BorderLayout.NORTH);
         add(expensePanel, BorderLayout.SOUTH);
@@ -143,23 +128,7 @@ public class BudgetAppGUI extends JFrame {
         add(expenseScrollPane, BorderLayout.EAST);
         add(actionPanel, BorderLayout.CENTER);
 
-        saveBudget.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-                try {
-                    saveBudget();
-                    JOptionPane.showMessageDialog(null,
-                    "Changes to budget has successfully been saved. Feel free to keep making changes.",
-                    "Changes saved",
-                    JOptionPane.PLAIN_MESSAGE);
-                } catch (FileNotFoundException error) {
-                    JOptionPane.showMessageDialog(null,
-                        "Unable to write to file: " + JSON_STORE + ". Budget is unsaved.",
-                    "Error saving budget",
-                    JOptionPane.PLAIN_MESSAGE);
-                }
-				
-            }
-		});
+        handleSaveBudget(saveBudget);
 
         incomeAddButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -211,7 +180,7 @@ public class BudgetAppGUI extends JFrame {
 
     private void setupApp() {
         String wantsLoadBudget = JOptionPane.showInputDialog(null,
-					  "Type 'Y' to load existing budget otherwise type anything (don't leave blank)",
+					  "Type 'Y' (no quotes) to load existing budget otherwise type anything (don't leave blank)",
 					  "Load budget",
 					  JOptionPane.QUESTION_MESSAGE);
         
@@ -332,6 +301,26 @@ public class BudgetAppGUI extends JFrame {
                 expenseTableModel.addRow(new Object[]{expense.getDay(), expense.getAmount(), expense.getCategory(), expense.getNecessityType()});
             }
         }
+    }
+
+    private void handleSaveBudget(JButton saveBudget) {
+        saveBudget.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+                try {
+                    saveBudget();
+                    JOptionPane.showMessageDialog(null,
+                    "Changes to budget has successfully been saved. Feel free to keep making changes.",
+                    "Changes saved",
+                    JOptionPane.PLAIN_MESSAGE);
+                } catch (FileNotFoundException error) {
+                    JOptionPane.showMessageDialog(null,
+                        "Unable to write to file: " + JSON_STORE + ". Budget is unsaved.",
+                    "Error saving budget",
+                    JOptionPane.PLAIN_MESSAGE);
+                }
+				
+            }
+		});
     }
 
     // starts the application

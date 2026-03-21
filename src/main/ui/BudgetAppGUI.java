@@ -32,11 +32,25 @@ public class BudgetAppGUI extends JFrame {
     private JsonWriter jsonWriter;
     private JsonReader jsonReader;
     private Budget budget;
+    private DefaultTableModel incomeTableModel;
+    private DefaultTableModel expenseTableModel;
 
     public BudgetAppGUI() {
         budget = new Budget();
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
+
+        String[] incomeColumns = {"Day", "Amount (after tax)", "Source"};
+        incomeTableModel = new DefaultTableModel(incomeColumns, 0);
+        JTable incomeTable = new JTable(incomeTableModel);
+
+        JScrollPane incomeScrollPane = new JScrollPane(incomeTable);
+
+        String[] expenseColumns = {"Day", "Amount", "Category", "Necessity Type"};
+        expenseTableModel = new DefaultTableModel(expenseColumns, 0);
+        JTable expenseTable = new JTable(expenseTableModel);
+
+        JScrollPane expenseScrollPane = new JScrollPane(expenseTable);
 
         setSize(WIDTH, HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -116,17 +130,17 @@ public class BudgetAppGUI extends JFrame {
         actionPanel.add(incomeSourceButton);
         actionPanel.add(saveBudget);
 
-        String[] incomeColumns = {"Day", "Amount (after tax)", "Source"};
-        DefaultTableModel incomeTableModel = new DefaultTableModel(incomeColumns, 0);
-        JTable incomeTable = new JTable(incomeTableModel);
+        // String[] incomeColumns = {"Day", "Amount (after tax)", "Source"};
+        // // incomeTableModel = new DefaultTableModel(incomeColumns, 0);
+        // JTable incomeTable = new JTable(incomeTableModel);
 
-        JScrollPane incomeScrollPane = new JScrollPane(incomeTable);
+        // JScrollPane incomeScrollPane = new JScrollPane(incomeTable);
 
-        String[] expenseColumns = {"Day", "Amount", "Category", "Necessity Type"};
-        DefaultTableModel expenseTableModel = new DefaultTableModel(expenseColumns, 0);
-        JTable expenseTable = new JTable(expenseTableModel);
+        // String[] expenseColumns = {"Day", "Amount", "Category", "Necessity Type"};
+        // expenseTableModel = new DefaultTableModel(expenseColumns, 0);
+        // JTable expenseTable = new JTable(expenseTableModel);
 
-        JScrollPane expenseScrollPane = new JScrollPane(expenseTable);
+        // JScrollPane expenseScrollPane = new JScrollPane(expenseTable);
 
         add(incomePanel, BorderLayout.NORTH);
         add(expensePanel, BorderLayout.SOUTH);
@@ -160,6 +174,7 @@ public class BudgetAppGUI extends JFrame {
                 double tax = Double.parseDouble(incomeTaxField.getText());
                 Income income = new Income(amount, day, source, tax);
                 budget.getCurrentMonthBudget().addIncome(income);
+                displayNewIncome(amount, source, day);
             }
         });
 
@@ -171,6 +186,7 @@ public class BudgetAppGUI extends JFrame {
                 String necessityType = expenseNecessityField.getText();
                 Expense expense = new Expense(amount, day, category, necessityType);
                 budget.getCurrentMonthBudget().addExpense(expense);
+                displayNewExpense(amount, category, day, necessityType);
             }
         });
 
@@ -180,6 +196,7 @@ public class BudgetAppGUI extends JFrame {
                 String source = incomeSourceField.getText();
                 int day = Integer.parseInt(incomeDayField.getText());
                 budget.getCurrentMonthBudget().removeIncome(day, amount, source);
+                deleteRemovedIncome(amount, source, day);
             }
         });
 
@@ -189,6 +206,7 @@ public class BudgetAppGUI extends JFrame {
                 String category = expenseCategoryField.getText();
                 int day = Integer.parseInt(expenseDayField.getText());
                 budget.getCurrentMonthBudget().removeExpense(day, amount, category);
+                deleteRemovedExpense(amount, category, day);
             }
         });
 
@@ -263,10 +281,61 @@ public class BudgetAppGUI extends JFrame {
             budget = jsonReader.read();
             System.out.println("Loaded budget for " + getMonthName(budget.getMonth()) 
                     + " " + budget.getYear() + " from " + JSON_STORE);
+            displayPreviousIncome();
+            displayPreviousExpenses();
         } catch (IOException e) {
             System.out.println("Unable to read from file: " + JSON_STORE);
             System.exit(0);
-            // keepGoing = false;
+        }
+    }
+
+    private void displayNewIncome(int amount, String source, int day) {
+        incomeTableModel.addRow(new Object[]{day, amount, source});
+    }
+
+    private void displayNewExpense(int amount, String category, int day, String necessityType) {
+        expenseTableModel.addRow(new Object[]{day, amount, category, necessityType});
+    }
+
+    private void deleteRemovedIncome(int amount, String source, int day) {
+        for (int i = 0; i < incomeTableModel.getRowCount(); i++) {
+            int tableDay = (Integer) incomeTableModel.getValueAt(i, 0);
+            int tableAmount = (Integer) incomeTableModel.getValueAt(i, 1);
+            String tableSource = (String) incomeTableModel.getValueAt(i, 2);
+            if (tableDay == day && tableAmount == amount && tableSource.equals(source)) {
+                incomeTableModel.removeRow(i);
+                break;
+            }
+        }
+    }
+
+    private void deleteRemovedExpense(int amount, String category, int day) {
+        for (int i = 0; i < expenseTableModel.getRowCount(); i++) {
+            int tableDay = (Integer) expenseTableModel.getValueAt(i, 0);
+            int tableAmount = (Integer) expenseTableModel.getValueAt(i, 1);
+            String tableCategory = (String) expenseTableModel.getValueAt(i, 2);
+            if (tableDay == day && tableAmount == amount && tableCategory.equals(category)) {
+                expenseTableModel.removeRow(i);
+                break;
+            }
+        }
+    }
+
+    private void displayPreviousIncome() {
+        ArrayList<Income> previousIncomes = budget.getCurrentMonthBudget().getAllIncome();
+        if (previousIncomes != null) {
+            for (Income income : previousIncomes) {
+                incomeTableModel.addRow(new Object[]{income.getDay(), income.getAmount(), income.getSource()});
+            }
+        }
+    }
+
+    private void displayPreviousExpenses() {
+        ArrayList<Expense> previousExpenses = budget.getCurrentMonthBudget().getAllExpenses();
+        if (previousExpenses != null) {
+            for (Expense expense: previousExpenses) {
+                expenseTableModel.addRow(new Object[]{expense.getDay(), expense.getAmount(), expense.getCategory(), expense.getNecessityType()});
+            }
         }
     }
 

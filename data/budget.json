@@ -1,16 +1,78 @@
 {
     "currentMonthBudget": [{
-        "month": 5,
-        "year": 90,
-        "allIncome": [],
-        "allExpenses": []
+        "month": 3,
+        "year": 2026,
+        "allIncome": [
+            {
+                "amount": 123,
+                "tax": 0.1,
+                "source": "fds",
+                "day": 1
+            },
+            {
+                "amount": 123,
+                "tax": 0.1,
+                "source": "fds",
+                "day": 1
+            },
+            {
+                "amount": 123,
+                "tax": 0.1,
+                "source": "fds",
+                "day": 1
+            }
+        ],
+        "allExpenses": [
+            {
+                "amount": 654,
+                "necessityType": "need",
+                "category": "gfd",
+                "day": 6
+            },
+            {
+                "amount": 654,
+                "necessityType": "need",
+                "category": "gfd",
+                "day": 6
+            },
+            {
+                "amount": 654,
+                "necessityType": "need",
+                "category": "gfd",
+                "day": 6
+            },
+            {
+                "amount": 654,
+                "necessityType": "need",
+                "category": "gfd",
+                "day": 6
+            },
+            {
+                "amount": 654,
+                "necessityType": "need",
+                "category": "gfd",
+                "day": 6
+            },
+            {
+                "amount": 654,
+                "necessityType": "need",
+                "category": "gfd",
+                "day": 6
+            },
+            {
+                "amount": 654,
+                "necessityType": "need",
+                "category": "gfd",
+                "day": 6
+            }
+        ]
     }],
     "isInScenarioMode": false,
-    "month": 5,
-    "year": 90,
+    "month": 3,
+    "year": 2026,
     "scenarioAddOns": [{
-        "month": 5,
-        "year": 90,
+        "month": 3,
+        "year": 2026,
         "allIncome": [],
         "allExpenses": []
     }]

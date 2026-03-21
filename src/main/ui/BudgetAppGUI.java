@@ -7,12 +7,9 @@ import persistance.JsonReader;
 import persistance.JsonWriter;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,8 +18,6 @@ import ca.ubc.cs.ExcludeFromJacocoGeneratedReport;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-
-import org.w3c.dom.events.MouseEvent;
 
 @ExcludeFromJacocoGeneratedReport
 public class BudgetAppGUI extends JFrame {
@@ -40,7 +35,7 @@ public class BudgetAppGUI extends JFrame {
         jsonWriter = new JsonWriter(JSON_STORE);
         jsonReader = new JsonReader(JSON_STORE);
 
-        String[] incomeColumns = {"Day", "Amount (after tax)", "Source"};
+        String[] incomeColumns = {"Day", "Amount", "Amount (after tax)", "Source"};
         incomeTableModel = new DefaultTableModel(incomeColumns, 0);
         JTable incomeTable = new JTable(incomeTableModel);
 
@@ -174,7 +169,7 @@ public class BudgetAppGUI extends JFrame {
                 double tax = Double.parseDouble(incomeTaxField.getText());
                 Income income = new Income(amount, day, source, tax);
                 budget.getCurrentMonthBudget().addIncome(income);
-                displayNewIncome(amount, source, day);
+                displayNewIncome(amount, income.getAmount(), source, day);
             }
         });
 
@@ -289,8 +284,8 @@ public class BudgetAppGUI extends JFrame {
         }
     }
 
-    private void displayNewIncome(int amount, String source, int day) {
-        incomeTableModel.addRow(new Object[]{day, amount, source});
+    private void displayNewIncome(int amount, int amountAfterTax, String source, int day) {
+        incomeTableModel.addRow(new Object[]{day, amount, amountAfterTax, source});
     }
 
     private void displayNewExpense(int amount, String category, int day, String necessityType) {
@@ -301,7 +296,7 @@ public class BudgetAppGUI extends JFrame {
         for (int i = 0; i < incomeTableModel.getRowCount(); i++) {
             int tableDay = (Integer) incomeTableModel.getValueAt(i, 0);
             int tableAmount = (Integer) incomeTableModel.getValueAt(i, 1);
-            String tableSource = (String) incomeTableModel.getValueAt(i, 2);
+            String tableSource = (String) incomeTableModel.getValueAt(i, 3);
             if (tableDay == day && tableAmount == amount && tableSource.equals(source)) {
                 incomeTableModel.removeRow(i);
                 break;
@@ -325,7 +320,7 @@ public class BudgetAppGUI extends JFrame {
         ArrayList<Income> previousIncomes = budget.getCurrentMonthBudget().getAllIncome();
         if (previousIncomes != null) {
             for (Income income : previousIncomes) {
-                incomeTableModel.addRow(new Object[]{income.getDay(), income.getAmount(), income.getSource()});
+                incomeTableModel.addRow(new Object[]{income.getDay(), income.getOriginalAmount(), income.getAmount(), income.getSource()});
             }
         }
     }

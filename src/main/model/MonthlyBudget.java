@@ -101,6 +101,7 @@ public class MonthlyBudget implements Writable {
                 income.setAmount(newAmount);
                 income.setDay(newDay);
                 income.setSource(newSource);
+                System.out.println("yep");
                 break;
             }
         }

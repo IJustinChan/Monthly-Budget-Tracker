@@ -68,6 +68,96 @@
                 "tax": 0.002,
                 "source": "fdg",
                 "day": 1
+            },
+            {
+                "amount": 432,
+                "tax": 0,
+                "source": "gfd",
+                "day": 5
+            },
+            {
+                "amount": 432,
+                "tax": 0,
+                "source": "gfd",
+                "day": 5
+            },
+            {
+                "amount": 432,
+                "tax": 0,
+                "source": "gfd",
+                "day": 5
+            },
+            {
+                "amount": 432,
+                "tax": 0,
+                "source": "gfd",
+                "day": 5
+            },
+            {
+                "amount": 432,
+                "tax": 0,
+                "source": "gfd",
+                "day": 5
+            },
+            {
+                "amount": 432,
+                "tax": 0,
+                "source": "gfd",
+                "day": 5
+            },
+            {
+                "amount": 432,
+                "tax": 0,
+                "source": "gfd",
+                "day": 5
+            },
+            {
+                "amount": 432,
+                "tax": 0,
+                "source": "gfd",
+                "day": 5
+            },
+            {
+                "amount": 432,
+                "tax": 0,
+                "source": "gfd",
+                "day": 5
+            },
+            {
+                "amount": 432,
+                "tax": 0,
+                "source": "gfd",
+                "day": 5
+            },
+            {
+                "amount": 432,
+                "tax": 0,
+                "source": "gfd",
+                "day": 5
+            },
+            {
+                "amount": 432,
+                "tax": 0,
+                "source": "gfd",
+                "day": 5
+            },
+            {
+                "amount": 432,
+                "tax": 0,
+                "source": "gfd",
+                "day": 5
+            },
+            {
+                "amount": 432,
+                "tax": 0,
+                "source": "gfd",
+                "day": 5
+            },
+            {
+                "amount": 432,
+                "tax": 0,
+                "source": "gfd",
+                "day": 5
             }
         ],
         "allExpenses": [

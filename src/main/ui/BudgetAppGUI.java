@@ -37,8 +37,8 @@ https://www.youtube.com/watch?v=ccUdvsj4L0U&t=812s
 
 */
 
-// BudgetAppGUI class handles making the graphical user interface and interactions of the monthly budget
 @ExcludeFromJacocoGeneratedReport
+// BudgetAppGUI class handles making the graphical user interface and interactions of the monthly budget
 public class BudgetAppGUI extends JFrame {
     private static final int WIDTH = 1200;
     private static final int HEIGHT = 600;
@@ -156,10 +156,7 @@ public class BudgetAppGUI extends JFrame {
             jsonWriter.open();
             jsonWriter.write(budget);
             jsonWriter.close();
-            System.out.println("Saved budget for " + getMonthName(budget.getMonth()) + " " 
-                    + budget.getYear() + " to " + JSON_STORE);
         } catch (FileNotFoundException e) {
-            System.out.println("Unable to write to file: " + JSON_STORE);
             throw new FileNotFoundException();
         }
     }
@@ -170,12 +167,9 @@ public class BudgetAppGUI extends JFrame {
     private void loadBudget() {
         try {
             budget = jsonReader.read();
-            System.out.println("Loaded budget for " + getMonthName(budget.getMonth()) 
-                    + " " + budget.getYear() + " from " + JSON_STORE);
             displayPreviousIncome();
             displayPreviousExpenses();
         } catch (IOException e) {
-            System.out.println("Unable to read from file: " + JSON_STORE);
             System.exit(0);
         }
     }

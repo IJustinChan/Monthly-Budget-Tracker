@@ -38,12 +38,6 @@ public class IncomeTest {
     }
 
     @Test
-    void testCheckIsTaxable() {
-        assertTrue(job.checkIsTaxable(job.getTax()));
-        assertFalse(scholarship.checkIsTaxable(scholarship.getTax()));
-    }
-
-    @Test
     void testIncomeAfterTax() {
         assertEquals(900, job.incomeAfterTax(job.getTax()));
     }

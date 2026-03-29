@@ -1,8 +1,11 @@
 package ui;
 
 import model.Budget;
+import model.EventLog;
 import model.Expense;
 import model.Income;
+import model.Event;
+import model.EventLog;
 import persistance.JsonReader;
 import persistance.JsonWriter;
 
@@ -10,6 +13,8 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -98,8 +103,21 @@ public class BudgetAppGUI extends JFrame {
         handleAddExpense();
         handleRemoveExpense();
 
+        handleEventLog();
+
         setupFrame();
         setVisible(true);
+    }
+
+    // EFFECTS: Writes all the contents in EventLog to console after the window is closed
+    private void handleEventLog() {
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent e) {
+                for (Event event : EventLog.getInstance()) {
+                    System.out.println(event);
+                }
+            }
+        });
     }
 
     // MODIFIES: this

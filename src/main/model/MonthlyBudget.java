@@ -50,12 +50,14 @@ public class MonthlyBudget implements Writable {
     // EFFECTS: adds a new income to the list of all incomes
     public void addIncome(Income income) {
         allIncome.add(income);
+        EventLog.getInstance().logEvent(new Event(String.format("An income of amount $%s added to day %s", income.getAmount(), income.getDay())));
     }
-    
+
     // MODIFIES: this
     // EFFECTS: adds a new expense to the list of all expenses
     public void addExpense(Expense expense) {
         allExpenses.add(expense);
+        EventLog.getInstance().logEvent(new Event(String.format("An expense of amount $%s added to day %s", expense.getAmount(), expense.getDay())));
     }
 
     // REQUIRES: 1 <= day <= 31 AND amount > 0
@@ -68,6 +70,7 @@ public class MonthlyBudget implements Writable {
             if (income.getDay() == day && income.getOriginalAmount() == amount 
                        && income.getSource().equals(source)) {
                 allIncome.remove(index);
+                EventLog.getInstance().logEvent(new Event(String.format("An income of amount $%s removed from day %s", income.getAmount(), income.getDay())));
                 break;
             }
             index++;
@@ -84,6 +87,7 @@ public class MonthlyBudget implements Writable {
             if (expense.getDay() == day && expense.getAmount() == amount 
                         && expense.getCategory().equals(category)) {
                 allExpenses.remove(index);
+                EventLog.getInstance().logEvent(new Event(String.format("An expense of amount $%s removed day %s", expense.getAmount(), expense.getDay())));
                 break;
             }
             index++;

@@ -91,7 +91,7 @@ public class MonthlyBudget implements Writable {
                         && expense.getCategory().equals(category)) {
                 allExpenses.remove(index);
                 EventLog.getInstance().logEvent(new Event(String.format(
-                            "An expense of amount $%s removed day %s", expense.getAmount(), expense.getDay())));
+                            "An expense of amount $%s removed from day %s", expense.getAmount(), expense.getDay())));
                 break;
             }
             index++;

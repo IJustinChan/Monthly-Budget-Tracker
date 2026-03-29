@@ -5,7 +5,6 @@ import model.EventLog;
 import model.Expense;
 import model.Income;
 import model.Event;
-import model.EventLog;
 import persistance.JsonReader;
 import persistance.JsonWriter;
 

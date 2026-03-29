@@ -25,4 +25,20 @@ This budget app will allow users to add multiple incomes and expenses along with
 - You can reload the state of my application by typing "Y" (no quotes) when the pop-up shows up after running the program and the pop-up should be asking you if you want to load existing data or not. If you don't want to load existing data, type anything (just don't leave it blank) and proceed to enter the new month and year.
 
 ## Phase 4: Task 2
-![alt text](image.png)
+* Sun Mar 29 15:25:31 PDT 2026
+* An income of amount $800 added to day 1
+* Sun Mar 29 15:25:45 PDT 2026
+* An expense of amount $120 added to day 17
+* Sun Mar 29 15:25:58 PDT 2026
+* An income of amount $50 added to day 1
+* Sun Mar 29 15:26:02 PDT 2026
+* An income of amount $50 removed from day 1
+* Sun Mar 29 15:26:04 PDT 2026
+* An expense of amount $120 removed day 17
+* Sun Mar 29 15:26:33 PDT 2026
+* An expense of amount $20 added to day 6
+
+## Phase 4: Task 3
+Looking at my UML class design diagram, a refactoring change I would make is to make MonthlyBudget store a arbitary size list of Transaction. Currently, MonthlyBudget has two fields that each stores a list of Income and a list of Expense. This current design resulted in me needing to rewrite several similar code such as addIncome, addExpense, removeIncome, and removeExpense, which is very tedious. If MonthlyBudget only has one field that stores a list of Transactions, then it would reduce code duplication since I would only need one method for adding a transaction and removing a transaction. This refactoring would be easy to do as Income and Expense already extends Transaction, so this refactoring would make better use of this relationship. However, the tradeoff is that I would lose quicker access to getting incomes only or getting expense only since they would both fall under a list of Transaction. I would need to loop over the Transaction list to find all incomes or all expenses. However, I think this tradeoff is fine as the overall design of the program is more readable, has less code duplication, and has less coupling.
+
+Another refactoring I would make is to create more classes that handles the GUI instead of using a single class called BudgetAppGUI to do all the work. At the moment, using this one class results in low cohesion and no coupling. By creating more classes to manage the GUI, it would increase the coupling and it would also significantly increase the cohesion, which makes all these classes follow the single responsibility principle. 

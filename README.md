@@ -23,3 +23,6 @@ This budget app will allow users to add multiple incomes and expenses along with
 - You can locate my visual component by going to the main budget window and looking at the center of the window.
 - You can save the state of my application by pressing the "Save Budget" button. All contents will be saved and you can continue using the application until you exit.
 - You can reload the state of my application by typing "Y" (no quotes) when the pop-up shows up after running the program and the pop-up should be asking you if you want to load existing data or not. If you don't want to load existing data, type anything (just don't leave it blank) and proceed to enter the new month and year.
+
+## Phase 4: Task 2
+![alt text](image.png)

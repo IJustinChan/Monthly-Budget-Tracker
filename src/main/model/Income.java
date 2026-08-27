@@ -2,7 +2,7 @@ package model;
 
 import org.json.JSONObject;
 
-import persistance.Writable;
+import persistence.Writable;
 
 // Income class represents information about a person's income such as amount before and after tax, 
 // tax rate, and the source of that income

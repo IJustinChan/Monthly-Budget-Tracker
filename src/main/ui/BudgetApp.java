@@ -3,8 +3,8 @@ package ui;
 import model.Budget;
 import model.Expense;
 import model.Income;
-import persistance.JsonReader;
-import persistance.JsonWriter;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

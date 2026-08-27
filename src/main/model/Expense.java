@@ -2,7 +2,7 @@ package model;
 
 import org.json.JSONObject;
 
-import persistance.Writable;
+import persistence.Writable;
 
 // Expense class that stores information about a person's expense such as amount, date, category, 
 // and whether its a need or want

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import persistance.Writable;
+import persistence.Writable;
 
 // Represents a person's budget for a certain month along with scenario mode
 // scenario mode lets users add new incomes or expenses to experiment what will happen

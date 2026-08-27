@@ -5,8 +5,8 @@ import model.EventLog;
 import model.Expense;
 import model.Income;
 import model.Event;
-import persistance.JsonReader;
-import persistance.JsonWriter;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;

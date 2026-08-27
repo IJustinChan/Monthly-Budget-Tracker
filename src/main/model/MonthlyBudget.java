@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import persistance.Writable;
+import persistence.Writable;
 
 // MonthlyBudget represents information about how a user's monthly budget appears, such as storing
 // all the expenses and incomes in a given month

@@ -1,4 +1,4 @@
-package persistance;
+package persistence;
 
 import org.junit.jupiter.api.Test;
 
@@ -7,6 +7,8 @@ import model.Budget;
 import model.Expense;
 import model.Income;
 import model.MonthlyBudget;
+import persistence.JsonReader;
+import persistence.JsonWriter;
 
 import java.io.IOException;
 

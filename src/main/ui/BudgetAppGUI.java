@@ -73,6 +73,7 @@ public class BudgetAppGUI extends JFrame {
     private JButton expenseRemoveButton;
     private JPanel centerPanel;
     private JButton saveBudget;
+    private JButton showSummaryButton;
 
     // EFFECTS: initializes everything in the GUI and calls method to handle user input and other functionalities
     public BudgetAppGUI() {
@@ -95,6 +96,7 @@ public class BudgetAppGUI extends JFrame {
         addInfoToExpensePanel();
 
         setupCenterPanel();
+        handleShowSummary();
 
         handleSaveBudget();
         handleAddIncome();
@@ -385,13 +387,31 @@ public class BudgetAppGUI extends JFrame {
     // MODIFIES: this
     // EFFECTS: creates the center panel and adds the button and image to it
     private void setupCenterPanel() {
-        centerPanel = new JPanel(new GridLayout(2, 1, 10,10));
+        centerPanel = new JPanel(new GridLayout(3, 1, 10,10));
         ImageIcon budgetVisual = new ImageIcon(imagePath);
         JLabel budgetVisualLabel = new JLabel(budgetVisual);
         saveBudget = new JButton("Save Budget");
+        showSummaryButton = new JButton("Show Summary");
 
         centerPanel.add(budgetVisualLabel);
+        centerPanel.add(showSummaryButton);
         centerPanel.add(saveBudget);
+    }
+
+    // MODIFIES: this
+    // EFFECTS: displays total income, total expense, and net income when button clicked
+    private void handleShowSummary() {
+        showSummaryButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                int totalIncome = budget.getCurrentMonthBudget().getTotalIncome();
+                int totalExpense = budget.getCurrentMonthBudget().getTotalExpenses();
+                int netIncome = budget.getCurrentMonthBudget().getNetIncome();
+                String message = "Total Income: " + totalIncome + "\n"
+                        + "Total Expense: " + totalExpense + "\n"
+                        + "Net Income: " + netIncome;
+                JOptionPane.showMessageDialog(null, message, "Budget Summary", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
     }
 
     // MODIFIES: this

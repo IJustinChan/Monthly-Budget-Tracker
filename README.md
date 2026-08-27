@@ -1,6 +1,6 @@
 # Monthly Budget Tracker
 
-A Java desktop and terminal application for tracking monthly income and expenses. Users can manage their budget through either a Java Swing graphical interface or a terminal-based interface. Budget data can be saved and loaded using JSON.
+A Java desktop and terminal application for tracking monthly income and expenses. Users can manage their budget through either a Java Swing graphical interface or a terminal-based interface. The monthly budget data can be saved and loaded using JSON.
 
 The application also includes a hypothetical budgeting feature in the terminal interface, allowing users to test potential income and expense changes without modifying their actual budget.
 
@@ -12,6 +12,9 @@ The application also includes a hypothetical budgeting feature in the terminal i
 - Load previously saved budget data
 - Experiment with "what-if" income and expense scenarios without modifying the saved budget (terminal interface only)
 
+## Screenshots
+![Budget Tracker GUI](images/budgetGUI.png)
+
 ## Technologies Used
 - Java
 - Java Swing
@@ -19,15 +22,12 @@ The application also includes a hypothetical budgeting feature in the terminal i
 - JUnit
 - Object-Oriented Programming
 
-## Screenshots
-![Budget Tracker GUI](images/budgetGUI.png)
-
 ## Requirements and Running the Program
-Ensure that Java is installed on your system.
+Ensure that Java 24 or later is installed on your system.
 
-To use the terminal interface, run the file `Main.java`.
+To use the terminal interface, run the `Main` class located in: `src/main/ui/Main.java`
 
-To use the GUI, run the file `BudgetAppGUI.java`. The GUI will pop up in another window.
+To use the GUI, run the `BudgetAppGUI` class located in `src/main/ui/BudgetAppGUI.java`. This launches the Java Swing graphical interface in a separate window.
 
 ## Testing
 
@@ -83,3 +83,4 @@ src/
 - `test/model` — Contains JUnit tests for the core model classes.
 - `test/persistence` — Contains JUnit tests for JSON reading and writing.
 
+This separation keeps the user interface, application logic, and data persistence independent from one another.
